@@ -1,0 +1,54 @@
+/* ═══════════════════════════════════════════════
+   tokens.css — Design tokens & CSS variables
+   Wedding: Allwyn Jerald & Leena Maria Celestina
+   ═══════════════════════════════════════════════ */
+
+:root {
+  /* Color Palette */
+  --gold:        #b8966e;
+  --gold-light:  #d4b48c;
+  --gold-pale:   #f0e6d3;
+  --gold-dark:   #8a6d4c;
+  --cream:       #fdf8f0;
+  --ivory:       #faf5eb;
+  --deep:        #120e08;
+  --charcoal:    #2e261a;
+  --muted:       #7a6a54;
+  --rose:        #c9a49a;
+  --rose-light:  #e8d5d0;
+
+  /* Typography */
+  --font-display:  'Cormorant Garamond', Georgia, serif;
+  --font-serif:    'EB Garamond', Georgia, serif;
+  --font-caps:     'Cinzel', serif;
+  --font-sans:     'Montserrat', sans-serif;
+
+  /* Spacing Scale */
+  --space-xs:  8px;
+  --space-sm:  16px;
+  --space-md:  32px;
+  --space-lg:  64px;
+  --space-xl:  100px;
+  --space-2xl: 140px;
+
+  /* Border & Decoration */
+  --border-gold:       1px solid rgba(184, 150, 110, 0.3);
+  --border-gold-hover: 1px solid rgba(184, 150, 110, 0.65);
+  --radius-sm:  4px;
+  --radius-md:  8px;
+
+  /* Transitions */
+  --ease-elegant: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-base: 0.35s var(--ease-elegant);
+  --transition-slow: 0.7s var(--ease-elegant);
+
+  /* Shadows */
+  --shadow-gold: 0 4px 40px rgba(184, 150, 110, 0.12);
+  --shadow-deep: 0 8px 60px rgba(18, 14, 8, 0.35);
+
+  /* Z-index layers */
+  --z-base:    1;
+  --z-overlay: 10;
+  --z-nav:     100;
+  --z-modal:   1000;
+}

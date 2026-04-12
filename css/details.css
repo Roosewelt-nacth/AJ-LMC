@@ -1,0 +1,163 @@
+/* ═══════════════════════════════════════
+   details.css — Event Details card block
+   ═══════════════════════════════════════ */
+
+.details {
+  background: var(--ivory);
+  padding: var(--space-xl) 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top & bottom gold accent rules */
+.details::before,
+.details::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+  opacity: 0.45;
+}
+.details::before { top: 0; }
+.details::after  { bottom: 0; }
+
+/* ── Grid container ── */
+.details__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px;
+  max-width: 960px;
+  margin: 56px auto 0;
+  background: rgba(184, 150, 110, 0.14);
+  border: 1px solid rgba(184, 150, 110, 0.2);
+}
+
+/* ── Individual card ── */
+.detail-card {
+  background: var(--ivory);
+  padding: 52px 36px;
+  text-align: center;
+  position: relative;
+  transition: background var(--transition-base),
+              transform var(--transition-base);
+  cursor: default;
+}
+.detail-card:hover {
+  background: var(--cream);
+  transform: translateY(-3px);
+  z-index: 2;
+}
+
+/* Hover shine line at top */
+.detail-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 20%; right: 20%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+.detail-card:hover::before { opacity: 0.7; }
+
+/* ── Card icon wrapper ── */
+.detail-card__icon {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 26px;
+  opacity: 0.65;
+  transition: opacity var(--transition-base), transform var(--transition-base);
+}
+.detail-card:hover .detail-card__icon {
+  opacity: 0.9;
+  transform: scale(1.08);
+}
+.detail-card__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Label ── */
+.detail-card__label {
+  font-family: var(--font-caps);
+  font-size: 9px;
+  letter-spacing: 5px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+/* ── Primary value ── */
+.detail-card__value {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--charcoal);
+  line-height: 1.25;
+  margin-bottom: 8px;
+  transition: color var(--transition-base);
+}
+.detail-card:hover .detail-card__value {
+  color: var(--gold-dark);
+}
+
+/* ── Sub text ── */
+.detail-card__sub {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ── Countdown strip (below grid) ── */
+.details__countdown {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0;
+  margin: 50px auto 0;
+  max-width: 500px;
+}
+.countdown-unit {
+  flex: 1;
+  text-align: center;
+  padding: 24px 0;
+  border-top: 1px solid rgba(184,150,110,0.2);
+}
+.countdown-unit__number {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 7vw, 64px);
+  font-weight: 300;
+  color: var(--charcoal);
+  line-height: 1;
+  display: block;
+  margin-bottom: 6px;
+}
+.countdown-unit__label {
+  font-family: var(--font-caps);
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.countdown-sep {
+  font-family: var(--font-display);
+  font-size: 36px;
+  color: var(--gold-light);
+  opacity: 0.5;
+  line-height: 1;
+  padding: 24px 4px 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .details__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .detail-card { padding: 36px 20px; }
+}
+@media (max-width: 380px) {
+  .details__grid { grid-template-columns: 1fr; }
+}
