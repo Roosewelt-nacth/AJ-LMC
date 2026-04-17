@@ -1,163 +1,238 @@
-/* ═══════════════════════════════════════
-   details.css — Event Details card block
-   ═══════════════════════════════════════ */
-
 .details {
-  background: var(--ivory);
+  background: var(--section-gradient);
   padding: var(--space-xl) 24px;
   position: relative;
   overflow: hidden;
 }
 
-/* Top & bottom gold accent rules */
 .details::before,
 .details::after {
   content: '';
   position: absolute;
-  left: 0; right: 0;
+  left: 0;
+  right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
-  opacity: 0.45;
+  background: linear-gradient(90deg, transparent, rgba(198, 165, 107, 0.55), transparent);
+  opacity: 0.48;
 }
-.details::before { top: 0; }
-.details::after  { bottom: 0; }
 
-/* ── Grid container ── */
+.details::before {
+  top: 0;
+}
+
+.details::after {
+  bottom: 0;
+}
+
+.details__wrap {
+  max-width: var(--container-lg);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
 .details__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1px;
-  max-width: 960px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  max-width: var(--container-md);
   margin: 56px auto 0;
-  background: rgba(184, 150, 110, 0.14);
-  border: 1px solid rgba(184, 150, 110, 0.2);
 }
 
-/* ── Individual card ── */
 .detail-card {
-  background: var(--ivory);
-  padding: 52px 36px;
-  text-align: center;
   position: relative;
-  transition: background var(--transition-base),
-              transform var(--transition-base);
+  overflow: hidden;
+  background: var(--card-gradient);
+  border: var(--border-gold);
+  border-radius: var(--radius-lg);
+  padding: 42px 28px;
+  text-align: center;
+  backdrop-filter: blur(var(--blur-sm));
+  -webkit-backdrop-filter: blur(var(--blur-sm));
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--transition-base),
+              border-color var(--transition-base),
+              box-shadow var(--transition-base),
+              background var(--transition-base);
   cursor: default;
 }
+
 .detail-card:hover {
-  background: var(--cream);
-  transform: translateY(-3px);
+  transform: translateY(-8px);
+  border: var(--border-gold-hover);
+  box-shadow: var(--shadow-gold), var(--shadow-soft);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(250, 235, 237, 0.55) 100%);
   z-index: 2;
 }
 
-/* Hover shine line at top */
 .detail-card::before {
   content: '';
   position: absolute;
-  top: 0; left: 20%; right: 20%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+  inset: 0;
+  background:
+    radial-gradient(circle at top, rgba(198, 165, 107, 0.12), transparent 42%);
   opacity: 0;
   transition: opacity var(--transition-base);
+  pointer-events: none;
 }
-.detail-card:hover::before { opacity: 0.7; }
 
-/* ── Card icon wrapper ── */
+.detail-card:hover::before {
+  opacity: 1;
+}
+
+.detail-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 18%;
+  right: 18%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+  opacity: 0.75;
+}
+
 .detail-card__icon {
-  width: 52px;
-  height: 52px;
-  margin: 0 auto 26px;
-  opacity: 0.65;
-  transition: opacity var(--transition-base), transform var(--transition-base);
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 24px;
+  opacity: 0.72;
+  transition: opacity var(--transition-base),
+              transform var(--transition-base),
+              filter var(--transition-base);
 }
+
 .detail-card:hover .detail-card__icon {
-  opacity: 0.9;
-  transform: scale(1.08);
+  opacity: 1;
+  transform: translateY(-2px) scale(1.08);
+  filter: drop-shadow(0 10px 18px rgba(198, 165, 107, 0.18));
 }
+
 .detail-card__icon svg {
   width: 100%;
   height: 100%;
 }
 
-/* ── Label ── */
 .detail-card__label {
   font-family: var(--font-caps);
-  font-size: 9px;
-  letter-spacing: 5px;
-  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--gold-dark);
   text-transform: uppercase;
   margin-bottom: 14px;
 }
 
-/* ── Primary value ── */
 .detail-card__value {
   font-family: var(--font-display);
-  font-size: 26px;
+  font-size: clamp(24px, 2.4vw, 30px);
   font-weight: 400;
   color: var(--charcoal);
-  line-height: 1.25;
-  margin-bottom: 8px;
-  transition: color var(--transition-base);
+  line-height: 1.22;
+  margin-bottom: 10px;
+  transition: color var(--transition-base),
+              transform var(--transition-base);
+  text-wrap: balance;
 }
+
 .detail-card:hover .detail-card__value {
   color: var(--gold-dark);
 }
 
-/* ── Sub text ── */
 .detail-card__sub {
   font-family: var(--font-sans);
   font-size: 11px;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.3px;
   color: var(--muted);
-  line-height: 1.6;
+  line-height: 1.7;
+  text-transform: uppercase;
 }
 
-/* ── Countdown strip (below grid) ── */
 .details__countdown {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 0;
-  margin: 50px auto 0;
-  max-width: 500px;
+  gap: 10px;
+  margin: 54px auto 0;
+  max-width: 620px;
+  padding: 24px 18px;
+  border: var(--border-gold);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.62) 0%, rgba(253, 246, 238, 0.78) 100%);
+  backdrop-filter: blur(var(--blur-sm));
+  -webkit-backdrop-filter: blur(var(--blur-sm));
+  box-shadow: var(--shadow-soft);
 }
+
 .countdown-unit {
   flex: 1;
   text-align: center;
-  padding: 24px 0;
-  border-top: 1px solid rgba(184,150,110,0.2);
+  padding: 10px 0;
 }
+
 .countdown-unit__number {
   font-family: var(--font-display);
-  font-size: clamp(36px, 7vw, 64px);
-  font-weight: 300;
+  font-size: clamp(34px, 6vw, 62px);
+  font-weight: 400;
   color: var(--charcoal);
   line-height: 1;
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
+
 .countdown-unit__label {
   font-family: var(--font-caps);
   font-size: 9px;
   letter-spacing: 4px;
-  color: var(--gold);
+  color: var(--gold-dark);
   text-transform: uppercase;
 }
+
 .countdown-sep {
   font-family: var(--font-display);
-  font-size: 36px;
+  font-size: 34px;
   color: var(--gold-light);
-  opacity: 0.5;
+  opacity: 0.55;
   line-height: 1;
-  padding: 24px 4px 0;
+  padding-top: 12px;
 }
 
-/* ── Responsive ── */
-@media (max-width: 640px) {
+@media (max-width: 1024px) {
   .details__grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .detail-card { padding: 36px 20px; }
 }
-@media (max-width: 380px) {
-  .details__grid { grid-template-columns: 1fr; }
+
+@media (max-width: 640px) {
+  .details {
+    padding: 84px 16px;
+  }
+
+  .details__wrap {
+    padding: 0;
+  }
+
+  .details__grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-top: 40px;
+  }
+
+  .detail-card {
+    padding: 34px 22px;
+    border-radius: 24px;
+  }
+
+  .details__countdown {
+    gap: 4px;
+    margin-top: 40px;
+    padding: 18px 10px;
+    border-radius: 24px;
+  }
+
+  .countdown-unit__number {
+    font-size: clamp(28px, 9vw, 44px);
+  }
+
+  .countdown-sep {
+    font-size: 24px;
+    padding-top: 10px;
+  }
 }

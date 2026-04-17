@@ -1,438 +1,451 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Allwyn & Leena — Wedding Reception</title>
-  <meta name="description" content="Join us for the wedding reception of Allwyn Jerald & Leena Maria Celestina — 13th June 2025">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Allwyn & Leena — Engagement Ceremony</title>
+  <meta name="description" content="Join us for the engagement ceremony of Allwyn Jerald & Leena Maria Celestina" />
 
-  <!-- ── Google Fonts ── -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  />
 
-  <!-- ── GSAP (ScrollTrigger for advanced animations) ── -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 
-  <!-- ── CSS — one file per block ── -->
-  <link rel="stylesheet" href="css/tokens.css">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/hero.css">
-  <link rel="stylesheet" href="css/details.css">
-  <link rel="stylesheet" href="css/timeline.css">
-  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/hero.css" />
+  <link rel="stylesheet" href="css/details.css" />
+  <link rel="stylesheet" href="css/timeline.css" />
+  <link rel="stylesheet" href="css/sections.css" />
 </head>
+<body class="is-locked">
+  <div class="intro-gate" id="introGate" aria-label="Invitation intro" data-photo="images/engagement-cover.jpg">
+    <div class="intro-gate__bg" aria-hidden="true"></div>
+    <div class="intro-gate__grain" aria-hidden="true"></div>
+    <div class="intro-gate__glow intro-gate__glow--one" aria-hidden="true"></div>
+    <div class="intro-gate__glow intro-gate__glow--two" aria-hidden="true"></div>
 
-<body>
+    <div class="intro-gate__content">
+      <p class="intro-gate__eyebrow">A Special Invitation</p>
+      <div class="intro-gate__monogram">A <span>&</span> L</div>
 
-<!-- ════════════════════════════════════════════════ -->
-<!--  BLOCK 1 — HERO                                  -->
-<!-- ════════════════════════════════════════════════ -->
-<section class="hero" id="hero" aria-label="Hero — Wedding Reception">
+      <div class="intro-gate__divider" aria-hidden="true">
+        <div class="intro-gate__divider-line"></div>
+        <div class="intro-gate__divider-dot"></div>
+        <div class="intro-gate__divider-line"></div>
+      </div>
 
-  <div class="hero__bg" aria-hidden="true"></div>
-  <div class="hero__grain" aria-hidden="true"></div>
-  <hr class="hero__rule hero__rule--top" aria-hidden="true">
-  <hr class="hero__rule hero__rule--bottom" aria-hidden="true">
-
-  <!-- Corner ornaments -->
-  <div class="hero__corner hero__corner--tl" aria-hidden="true">
-    <svg viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M8 8 L130 8" stroke="#b8966e" stroke-width="0.6"/>
-      <path d="M8 8 L8 130" stroke="#b8966e" stroke-width="0.6"/>
-      <circle cx="8" cy="8" r="3" fill="#b8966e" opacity="0.9"/>
-      <path d="M8 28 Q28 28 28 48" stroke="#b8966e" stroke-width="0.5" fill="none" opacity="0.6"/>
-      <path d="M48 8 Q48 28 68 28 Q88 28 88 48" stroke="#b8966e" stroke-width="0.4" fill="none" opacity="0.35"/>
-      <circle cx="52" cy="52" r="9" stroke="#b8966e" stroke-width="0.5" fill="none" opacity="0.45"/>
-      <circle cx="52" cy="52" r="2.5" fill="#b8966e" opacity="0.35"/>
-      <path d="M52 42 Q57 52 52 62" stroke="#b8966e" stroke-width="0.5" fill="none" opacity="0.4"/>
-      <path d="M42 52 Q52 57 62 52" stroke="#b8966e" stroke-width="0.5" fill="none" opacity="0.4"/>
-    </svg>
-  </div>
-  <div class="hero__corner hero__corner--tr" aria-hidden="true">
-    <svg viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M8 8 L130 8" stroke="#b8966e" stroke-width="0.6"/>
-      <path d="M8 8 L8 130" stroke="#b8966e" stroke-width="0.6"/>
-      <circle cx="8" cy="8" r="3" fill="#b8966e" opacity="0.9"/>
-      <path d="M8 28 Q28 28 28 48" stroke="#b8966e" stroke-width="0.5" fill="none" opacity="0.6"/>
-      <circle cx="52" cy="52" r="9" stroke="#b8966e" stroke-width="0.5" fill="none" opacity="0.45"/>
-      <circle cx="52" cy="52" r="2.5" fill="#b8966e" opacity="0.35"/>
-    </svg>
-  </div>
-  <div class="hero__corner hero__corner--bl" aria-hidden="true">
-    <svg viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M8 8 L130 8" stroke="#b8966e" stroke-width="0.6"/>
-      <path d="M8 8 L8 130" stroke="#b8966e" stroke-width="0.6"/>
-      <circle cx="8" cy="8" r="3" fill="#b8966e" opacity="0.9"/>
-      <circle cx="52" cy="52" r="9" stroke="#b8966e" stroke-width="0.5" fill="none" opacity="0.45"/>
-    </svg>
-  </div>
-  <div class="hero__corner hero__corner--br" aria-hidden="true">
-    <svg viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M8 8 L130 8" stroke="#b8966e" stroke-width="0.6"/>
-      <path d="M8 8 L8 130" stroke="#b8966e" stroke-width="0.6"/>
-      <circle cx="8" cy="8" r="3" fill="#b8966e" opacity="0.9"/>
-      <circle cx="52" cy="52" r="9" stroke="#b8966e" stroke-width="0.5" fill="none" opacity="0.45"/>
-    </svg>
-  </div>
-
-  <!-- Main content -->
-  <div class="hero__content">
-    <p class="hero__label">Together with their families</p>
-
-    <div class="hero__names">
-      <span class="name-1">Allwyn Jerald</span>
-      <span class="ampersand">&amp;</span>
-      <span class="name-2">Leena Maria Celestina</span>
+      <p class="intro-gate__title">Allwyn Jerald & Leena Maria Celestina</p>
+      <p class="intro-gate__text">Touch, click, scroll, or press any key to begin</p>
     </div>
-
-    <!-- Divider -->
-    <div class="hero__divider" aria-hidden="true">
-      <div class="hero__divider-line hero__divider-line--l"></div>
-      <div class="hero__divider-diamond"></div>
-      <div class="hero__divider-line hero__divider-line--r"></div>
-    </div>
-
-    <p class="hero__event-tag">Request the pleasure of your company at their</p>
-    <p class="hero__date" style="font-family:var(--font-caps);font-size:clamp(14px,2.5vw,22px);letter-spacing:5px;">
-      WEDDING RECEPTION
-    </p>
-
-    <!-- Small divider -->
-    <div class="hero__divider" style="width:180px;margin:22px auto;" aria-hidden="true">
-      <div class="hero__divider-line hero__divider-line--l"></div>
-      <div class="hero__divider-diamond" style="width:5px;height:5px;"></div>
-      <div class="hero__divider-line hero__divider-line--r"></div>
-    </div>
-
-    <p class="hero__date">Friday, the Thirteenth of June</p>
-    <p class="hero__date" style="font-size:clamp(16px,2.8vw,26px);margin-top:4px;">Two Thousand and Twenty Five</p>
-    <p class="hero__date--sub">6:00 PM Onwards</p>
   </div>
+  <div class="page-shell is-waiting" id="pageShell">
+  <nav class="topnav" aria-label="Primary navigation">
+    <div class="topnav__inner">
+      <a class="topnav__brand" href="#hero">A & L</a>
+      <div class="topnav__links">
+        <a href="#welcome">About</a>
+        <a href="#story">Story</a>
+        <a href="#details">Details</a>
+        <a href="#programme">Schedule</a>
+        <a href="#rsvp">RSVP</a>
+        <a href="#location">Venue</a>
+      </div>
+    </div>
+  </nav>
 
-  <!-- Scroll cue -->
-  <div class="hero__scroll" aria-hidden="true">
-    <span>Scroll</span>
-    <div class="hero__scroll-bar"></div>
-  </div>
+  <section class="hero" id="hero" aria-label="Hero — Engagement Ceremony">
+    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="hero__grain" aria-hidden="true"></div>
+    <div class="hero__glow hero__glow--one" aria-hidden="true"></div>
+    <div class="hero__glow hero__glow--two" aria-hidden="true"></div>
+    <hr class="hero__rule hero__rule--top" aria-hidden="true" />
+    <hr class="hero__rule hero__rule--bottom" aria-hidden="true" />
 
-</section><!-- /HERO -->
-
-
-<!-- ════════════════════════════════════════════════ -->
-<!--  BLOCK 2 — WELCOME                               -->
-<!-- ════════════════════════════════════════════════ -->
-<section class="welcome" id="welcome" aria-label="Welcome message">
-  <div class="section-inner reveal">
-    <span class="section-tag">With Love &amp; Joy</span>
-    <h2 class="section-heading">A Celebration of<br><em>Two Hearts, One Journey</em></h2>
-
-    <div class="ornament-divider" aria-hidden="true">
-      <div class="ornament-divider__line"></div>
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-        <path d="M9 1 L11 7 L17 7 L12 11 L14 17 L9 13 L4 17 L6 11 L1 7 L7 7 Z"
-              stroke="#b8966e" stroke-width="0.8" fill="none" opacity="0.7"/>
+    <div class="hero__corner hero__corner--tl" aria-hidden="true">
+      <svg viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 8 L130 8" stroke="#b8966e" stroke-width="0.6" />
+        <path d="M8 8 L8 130" stroke="#b8966e" stroke-width="0.6" />
+        <circle cx="8" cy="8" r="3" fill="#b8966e" opacity="0.9" />
+        <path d="M8 28 Q28 28 28 48" stroke="#b8966e" stroke-width="0.5" fill="none" opacity="0.6" />
+        <path d="M48 8 Q48 28 68 28 Q88 28 88 48" stroke="#b8966e" stroke-width="0.4" fill="none" opacity="0.35" />
+        <circle cx="52" cy="52" r="9" stroke="#b8966e" stroke-width="0.5" fill="none" opacity="0.45" />
+        <circle cx="52" cy="52" r="2.5" fill="#b8966e" opacity="0.35" />
+        <path d="M52 42 Q57 52 52 62" stroke="#b8966e" stroke-width="0.5" fill="none" opacity="0.4" />
+        <path d="M42 52 Q52 57 62 52" stroke="#b8966e" stroke-width="0.5" fill="none" opacity="0.4" />
       </svg>
-      <div class="ornament-divider__line"></div>
     </div>
 
-    <p class="section-body">
-      We are overjoyed to share this beautiful milestone with those we hold dearest.
-      As we begin this new chapter together, your presence is the greatest gift we could ask for.
-    </p>
-    <p class="section-body" style="margin-top:20px;">
-      Please join us as we celebrate our union, surrounded by the warmth of family
-      and the laughter of cherished friends.
-    </p>
-  </div>
-</section><!-- /WELCOME -->
-
-
-<!-- ════════════════════════════════════════════════ -->
-<!--  BLOCK 3 — EVENT DETAILS + COUNTDOWN             -->
-<!-- ════════════════════════════════════════════════ -->
-<section class="details" id="details" aria-label="Event details">
-  <div class="section-inner reveal">
-    <span class="section-tag">Event Details</span>
-    <h2 class="section-heading">The Evening<br><em>Awaits You</em></h2>
-  </div>
-
-  <div style="max-width:960px;margin:0 auto;padding:0 24px;">
-    <div class="details__grid reveal-stagger">
-
-      <!-- Date -->
-      <div class="detail-card">
-        <div class="detail-card__icon">
-          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="6" y="10" width="36" height="32" rx="2" stroke="#b8966e" stroke-width="1.2"/>
-            <path d="M6 20 H42" stroke="#b8966e" stroke-width="1.1"/>
-            <path d="M16 6 V14" stroke="#b8966e" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M32 6 V14" stroke="#b8966e" stroke-width="1.5" stroke-linecap="round"/>
-            <text x="24" y="35" text-anchor="middle" fill="#b8966e" font-size="13"
-                  font-family="Cinzel,serif">13</text>
-          </svg>
-        </div>
-        <p class="detail-card__label">Date</p>
-        <p class="detail-card__value">Friday, 13th June</p>
-        <p class="detail-card__sub">2025</p>
-      </div>
-
-      <!-- Time -->
-      <div class="detail-card">
-        <div class="detail-card__icon">
-          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="24" cy="24" r="18" stroke="#b8966e" stroke-width="1.2"/>
-            <path d="M24 12 V24 L32 30" stroke="#b8966e" stroke-width="1.5"
-                  stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="24" cy="24" r="2" fill="#b8966e"/>
-          </svg>
-        </div>
-        <p class="detail-card__label">Time</p>
-        <p class="detail-card__value">6:00 PM</p>
-        <p class="detail-card__sub">Onwards into the evening</p>
-      </div>
-
-      <!-- Venue -->
-      <div class="detail-card">
-        <div class="detail-card__icon">
-          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M24 6 C16 6 10 13 10 21 C10 32 24 44 24 44 C24 44 38 32 38 21 C38 13 32 6 24 6Z"
-                  stroke="#b8966e" stroke-width="1.2"/>
-            <circle cx="24" cy="21" r="6" stroke="#b8966e" stroke-width="1.2"/>
-          </svg>
-        </div>
-        <p class="detail-card__label">Venue</p>
-        <p class="detail-card__value">The Grand Ballroom</p>
-        <p class="detail-card__sub">Chennai, Tamil Nadu</p>
-      </div>
-
-      <!-- Dress Code -->
-      <div class="detail-card">
-        <div class="detail-card__icon">
-          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 16 Q24 10 38 16 L38 38 Q24 44 10 38 Z"
-                  stroke="#b8966e" stroke-width="1.2" fill="none"/>
-            <path d="M10 16 L24 24 L38 16" stroke="#b8966e" stroke-width="1"/>
-            <path d="M24 24 L24 42" stroke="#b8966e" stroke-width="0.8" opacity="0.4"/>
-          </svg>
-        </div>
-        <p class="detail-card__label">Dress Code</p>
-        <p class="detail-card__value">Semi-Formal</p>
-        <p class="detail-card__sub">Elegant &amp; Festive Attire</p>
-      </div>
-
-    </div><!-- /.details__grid -->
-    <!-- Countdown injected here by countdown.js -->
-  </div>
-</section><!-- /DETAILS -->
-
-
-<!-- ════════════════════════════════════════════════ -->
-<!--  BLOCK 4 — PROGRAMME / TIMELINE                  -->
-<!-- ════════════════════════════════════════════════ -->
-<section class="timeline-section" id="programme" aria-label="Evening programme">
-  <div class="section-inner reveal">
-    <span class="section-tag">Programme</span>
-    <h2 class="section-heading">An Evening<br><em>to Remember</em></h2>
-    <div class="ornament-divider" aria-hidden="true">
-      <div class="ornament-divider__line"></div>
-      <div class="ornament-divider__diamond"></div>
-      <div class="ornament-divider__line"></div>
-    </div>
-  </div>
-
-  <div class="timeline reveal" role="list">
-
-    <div class="timeline__item" role="listitem">
-      <div class="timeline__content">
-        <span class="timeline__time">6:00 PM</span>
-        <p class="timeline__event">Arrival &amp; Welcome</p>
-        <p class="timeline__note">Guests arrive, welcome drinks served</p>
-      </div>
-      <div class="timeline__dot"><div class="timeline__dot-inner"></div></div>
-      <div class="timeline__spacer"></div>
+    <div class="hero__corner hero__corner--tr" aria-hidden="true">
+      <svg viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 8 L130 8" stroke="#b8966e" stroke-width="0.6" />
+        <path d="M8 8 L8 130" stroke="#b8966e" stroke-width="0.6" />
+        <circle cx="8" cy="8" r="3" fill="#b8966e" opacity="0.9" />
+        <path d="M8 28 Q28 28 28 48" stroke="#b8966e" stroke-width="0.5" fill="none" opacity="0.6" />
+        <circle cx="52" cy="52" r="9" stroke="#b8966e" stroke-width="0.5" fill="none" opacity="0.45" />
+        <circle cx="52" cy="52" r="2.5" fill="#b8966e" opacity="0.35" />
+      </svg>
     </div>
 
-    <div class="timeline__item" role="listitem">
-      <div class="timeline__spacer"></div>
-      <div class="timeline__dot"><div class="timeline__dot-inner"></div></div>
-      <div class="timeline__content">
-        <span class="timeline__time">6:30 PM</span>
-        <p class="timeline__event">Grand Entry</p>
-        <p class="timeline__note">The couple makes their entrance</p>
-      </div>
+    <div class="hero__corner hero__corner--bl" aria-hidden="true">
+      <svg viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 8 L130 8" stroke="#b8966e" stroke-width="0.6" />
+        <path d="M8 8 L8 130" stroke="#b8966e" stroke-width="0.6" />
+        <circle cx="8" cy="8" r="3" fill="#b8966e" opacity="0.9" />
+        <circle cx="52" cy="52" r="9" stroke="#b8966e" stroke-width="0.5" fill="none" opacity="0.45" />
+      </svg>
     </div>
 
-    <div class="timeline__item" role="listitem">
-      <div class="timeline__content">
-        <span class="timeline__time">7:00 PM</span>
-        <p class="timeline__event">Dinner &amp; Celebrations</p>
-        <p class="timeline__note">Sumptuous feast &amp; heartfelt toasts</p>
-      </div>
-      <div class="timeline__dot"><div class="timeline__dot-inner"></div></div>
-      <div class="timeline__spacer"></div>
+    <div class="hero__corner hero__corner--br" aria-hidden="true">
+      <svg viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 8 L130 8" stroke="#b8966e" stroke-width="0.6" />
+        <path d="M8 8 L8 130" stroke="#b8966e" stroke-width="0.6" />
+        <circle cx="8" cy="8" r="3" fill="#b8966e" opacity="0.9" />
+        <circle cx="52" cy="52" r="9" stroke="#b8966e" stroke-width="0.5" fill="none" opacity="0.45" />
+      </svg>
     </div>
 
-    <div class="timeline__item" role="listitem">
-      <div class="timeline__spacer"></div>
-      <div class="timeline__dot"><div class="timeline__dot-inner"></div></div>
-      <div class="timeline__content">
-        <span class="timeline__time">8:30 PM</span>
-        <p class="timeline__event">Cake Cutting</p>
-        <p class="timeline__note">A sweet moment to share together</p>
+    <div class="hero__content">
+      <p class="hero__label">Together with their families</p>
+
+      <div class="hero__names">
+        <span class="name-1">Allwyn Jerald</span>
+        <span class="ampersand">&</span>
+        <span class="name-2">Leena Maria Celestina</span>
       </div>
+
+      <div class="hero__divider" aria-hidden="true">
+        <div class="hero__divider-line hero__divider-line--l"></div>
+        <div class="hero__divider-diamond"></div>
+        <div class="hero__divider-line hero__divider-line--r"></div>
+      </div>
+
+      <p class="hero__event-tag">Request the pleasure of your company at their</p>
+      <p class="hero__date hero__event-title">ENGAGEMENT CEREMONY</p>
+
+      <div class="hero__divider hero__divider--small" aria-hidden="true">
+        <div class="hero__divider-line hero__divider-line--l"></div>
+        <div class="hero__divider-diamond hero__divider-diamond--small"></div>
+        <div class="hero__divider-line hero__divider-line--r"></div>
+      </div>
+
+      <p class="hero__date">13th of June</p>
+      <p class="hero__date hero__date--year">Two Thousand and Twenty Six</p>
+      <p class="hero__date--sub">6:00 PM Onwards</p>
     </div>
 
-    <div class="timeline__item" role="listitem">
-      <div class="timeline__content">
-        <span class="timeline__time">9:00 PM</span>
-        <p class="timeline__event">Dancing &amp; Festivities</p>
-        <p class="timeline__note">Celebrate the night away with us</p>
-      </div>
-      <div class="timeline__dot"><div class="timeline__dot-inner"></div></div>
-      <div class="timeline__spacer"></div>
+    <div class="hero__scroll" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="hero__scroll-bar"></div>
     </div>
+  </section>
 
-  </div><!-- /.timeline -->
-</section><!-- /PROGRAMME -->
-
-
-<!-- ════════════════════════════════════════════════ -->
-<!--  BLOCK 5 — QUOTE                                 -->
-<!-- ════════════════════════════════════════════════ -->
-<section class="quote-section" id="quote" aria-label="Quote">
-  <div class="section-inner reveal">
-    <span class="quote__mark" aria-hidden="true">"</span>
-    <blockquote>
-      <p class="quote__text">
-        To love and be loved is to feel the sun from both sides.
+  <section class="welcome" id="welcome" aria-label="Welcome message">
+    <div class="section-inner reveal">
+      <span class="section-tag">With Love & Joy</span>
+      <h2 class="section-heading">A Beautiful Beginning<br><em>of Forever</em></h2>
+      <div class="ornament-divider" aria-hidden="true">
+        <div class="ornament-divider__line"></div>
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M9 1 L11 7 L17 7 L12 11 L14 17 L9 13 L4 17 L6 11 L1 7 L7 7 Z" stroke="#b8966e" stroke-width="0.8" fill="none" opacity="0.7" />
+        </svg>
+        <div class="ornament-divider__line"></div>
+      </div>
+      <p class="section-body">
+        We are overjoyed to share this beautiful milestone with those we hold closest to our hearts.
+        As we begin this new chapter together, your presence will make our celebration even more special.
       </p>
-      <footer class="quote__attribution">— David Viscott</footer>
-    </blockquote>
+      <p class="section-body section-body--spaced">
+        Please join us as we celebrate our engagement surrounded by the warmth of family,
+        the blessings of elders, and the laughter of cherished friends.
+      </p>
+    </div>
+  </section>
 
-    <div class="hero__divider" style="margin:52px auto 0;width:240px;" aria-hidden="true">
-      <div class="hero__divider-line hero__divider-line--l"
-           style="background:linear-gradient(90deg,transparent,rgba(184,150,110,0.45));"></div>
-      <div class="hero__divider-diamond"></div>
-      <div class="hero__divider-line hero__divider-line--r"
-           style="background:linear-gradient(90deg,rgba(184,150,110,0.45),transparent);"></div>
+  <section class="couple-story" id="story" aria-label="Couple story">
+    <div class="section-inner reveal">
+      <span class="section-tag">Our Story</span>
+      <h2 class="section-heading">Allwyn <span>&</span> Leena</h2>
+      <div class="ornament-divider" aria-hidden="true">
+        <div class="ornament-divider__line"></div>
+        <div class="ornament-divider__diamond"></div>
+        <div class="ornament-divider__line"></div>
+      </div>
+      <p class="section-body">
+        Two hearts, one journey, and a lifetime of memories waiting to unfold.
+        We are delighted to celebrate this joyful beginning with the people we love most.
+      </p>
     </div>
 
-    <div class="quote__names">
-      Allwyn Jerald
-      <span>&amp;</span>
-      Leena Maria Celestina
+    <div class="couple-story__grid reveal-stagger">
+      <div class="couple-story__image-wrap">
+        <div class="couple-story__image" data-photo="images/couple-story.jpg"></div>
+      </div>
+      <div class="couple-story__text">
+        <p>
+          With grateful hearts and joyful anticipation, we invite you to be part of our engagement celebration.
+          Your presence will add warmth, love, and meaning to one of the most cherished moments of our lives.
+        </p>
+      </div>
     </div>
-  </div>
-</section><!-- /QUOTE -->
+  </section>
 
-
-<!-- ════════════════════════════════════════════════ -->
-<!--  BLOCK 6 — RSVP                                  -->
-<!-- ════════════════════════════════════════════════ -->
-<section class="rsvp-section" id="rsvp" aria-label="RSVP">
-  <div class="section-inner reveal">
-    <span class="section-tag">Kindly Respond</span>
-    <h2 class="section-heading">Will You<br><em>Join Us?</em></h2>
-  </div>
-
-  <div class="rsvp__box reveal">
-    <!-- Extra corner pseudo-elements handled via .rsvp__box-tr / bl spans -->
-    <span class="rsvp__box-tr" aria-hidden="true"></span>
-    <span class="rsvp__box-bl" aria-hidden="true"></span>
-
-    <p class="rsvp__intro">
-      Your presence would mean the world to us.<br>
-      Please let us know if you are able to attend<br>so we may prepare accordingly.
-    </p>
-
-    <div class="ornament-divider" aria-hidden="true">
-      <div class="ornament-divider__line"></div>
-      <div class="ornament-divider__diamond"></div>
-      <div class="ornament-divider__line"></div>
+  <section
+    class="details"
+    id="details"
+    aria-label="Event details"
+    data-event-date="2026-06-13T18:00:00+05:30"
+  >
+    <div class="section-inner reveal">
+      <span class="section-tag">Event Details</span>
+      <h2 class="section-heading">Join Us For<br><em>A Joyful Celebration</em></h2>
     </div>
 
-    <p class="rsvp__deadline-label">RSVP By</p>
-    <p class="rsvp__deadline">1st June 2025</p>
+    <div class="details__wrap">
+      <div class="details__grid reveal-stagger">
+        <div class="detail-card">
+          <div class="detail-card__icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="10" width="36" height="32" rx="2" stroke="#b8966e" stroke-width="1.2" />
+              <path d="M6 20 H42" stroke="#b8966e" stroke-width="1.1" />
+              <path d="M16 6 V14" stroke="#b8966e" stroke-width="1.5" stroke-linecap="round" />
+              <path d="M32 6 V14" stroke="#b8966e" stroke-width="1.5" stroke-linecap="round" />
+              <text x="24" y="35" text-anchor="middle" fill="#b8966e" font-size="13" font-family="Cinzel, serif">13</text>
+            </svg>
+          </div>
+          <p class="detail-card__label">Date</p>
+          <p class="detail-card__value">13th June</p>
+          <p class="detail-card__sub">2026</p>
+        </div>
 
-    <p class="rsvp__contact-note">For queries, please reach out to</p>
-    <p class="rsvp__contact-number">+91 98XXX XXXXX</p>
+        <div class="detail-card">
+          <div class="detail-card__icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="18" stroke="#b8966e" stroke-width="1.2" />
+              <path d="M24 12 V24 L32 30" stroke="#b8966e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <circle cx="24" cy="24" r="2" fill="#b8966e" />
+            </svg>
+          </div>
+          <p class="detail-card__label">Time</p>
+          <p class="detail-card__value">6:00 PM</p>
+          <p class="detail-card__sub">An evening of love and celebration</p>
+        </div>
 
-    <button class="rsvp__btn" aria-label="Confirm your attendance">
-      Confirm Attendance
-    </button>
+        <div class="detail-card">
+          <div class="detail-card__icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 6 C16 6 10 13 10 21 C10 32 24 44 24 44 C24 44 38 32 38 21 C38 13 32 6 24 6Z" stroke="#b8966e" stroke-width="1.2" />
+              <circle cx="24" cy="21" r="6" stroke="#b8966e" stroke-width="1.2" />
+            </svg>
+          </div>
+          <p class="detail-card__label">Venue</p>
+          <p class="detail-card__value">[Venue Name]</p>
+          <p class="detail-card__sub">Chennai, Tamil Nadu</p>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-card__icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 16 Q24 10 38 16 L38 38 Q24 44 10 38 Z" stroke="#b8966e" stroke-width="1.2" fill="none" />
+              <path d="M10 16 L24 24 L38 16" stroke="#b8966e" stroke-width="1" />
+              <path d="M24 24 L24 42" stroke="#b8966e" stroke-width="0.8" opacity="0.4" />
+            </svg>
+          </div>
+          <p class="detail-card__label">Dress Code</p>
+          <p class="detail-card__value">Elegant Traditional</p>
+          <p class="detail-card__sub">Festive attire welcomed</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="timeline-section" id="programme" aria-label="Evening programme">
+    <div class="section-inner reveal">
+      <span class="section-tag">Programme</span>
+      <h2 class="section-heading">Moments of Our<br><em>Special Evening</em></h2>
+      <div class="ornament-divider" aria-hidden="true">
+        <div class="ornament-divider__line"></div>
+        <div class="ornament-divider__diamond"></div>
+        <div class="ornament-divider__line"></div>
+      </div>
+    </div>
+
+    <div class="timeline reveal" role="list">
+      <div class="timeline__item" role="listitem">
+        <div class="timeline__content">
+          <span class="timeline__time">6:00 PM</span>
+          <p class="timeline__event">Guest Arrival</p>
+          <p class="timeline__note">Welcome drinks and warm greetings</p>
+        </div>
+        <div class="timeline__dot"><div class="timeline__dot-inner"></div></div>
+        <div class="timeline__spacer"></div>
+      </div>
+
+      <div class="timeline__item" role="listitem">
+        <div class="timeline__spacer"></div>
+        <div class="timeline__dot"><div class="timeline__dot-inner"></div></div>
+        <div class="timeline__content">
+          <span class="timeline__time">6:30 PM</span>
+          <p class="timeline__event">Ring Exchange Ceremony</p>
+          <p class="timeline__note">A beautiful beginning of forever</p>
+        </div>
+      </div>
+
+      <div class="timeline__item" role="listitem">
+        <div class="timeline__content">
+          <span class="timeline__time">7:00 PM</span>
+          <p class="timeline__event">Family Blessings</p>
+          <p class="timeline__note">Cherished moments with loved ones</p>
+        </div>
+        <div class="timeline__dot"><div class="timeline__dot-inner"></div></div>
+        <div class="timeline__spacer"></div>
+      </div>
+
+      <div class="timeline__item" role="listitem">
+        <div class="timeline__spacer"></div>
+        <div class="timeline__dot"><div class="timeline__dot-inner"></div></div>
+        <div class="timeline__content">
+          <span class="timeline__time">7:30 PM</span>
+          <p class="timeline__event">Dinner & Celebration</p>
+          <p class="timeline__note">Food, laughter, and memories together</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="quote-section" id="quote" aria-label="Quote">
+    <div class="section-inner reveal">
+      <span class="quote__mark" aria-hidden="true">"</span>
+      <blockquote>
+        <p class="quote__text">
+          To love and be loved is to feel the sun from both sides.
+        </p>
+        <footer class="quote__attribution">— David Viscott</footer>
+      </blockquote>
+
+      <div class="hero__divider quote__divider" aria-hidden="true">
+        <div class="hero__divider-line hero__divider-line--l quote__divider-line-left"></div>
+        <div class="hero__divider-diamond"></div>
+        <div class="hero__divider-line hero__divider-line--r quote__divider-line-right"></div>
+      </div>
+
+      <div class="quote__names">
+        Allwyn Jerald
+        <span>&</span>
+        Leena Maria Celestina
+      </div>
+    </div>
+  </section>
+
+  <section class="rsvp-section" id="rsvp" aria-label="RSVP">
+    <div class="section-inner reveal">
+      <span class="section-tag">Kindly Respond</span>
+      <h2 class="section-heading">We Would Love To<br><em>Celebrate With You</em></h2>
+    </div>
+
+    <div class="rsvp__box reveal">
+      <span class="rsvp__box-tr" aria-hidden="true"></span>
+      <span class="rsvp__box-bl" aria-hidden="true"></span>
+
+      <p class="rsvp__intro">
+        Your presence would mean the world to us.<br />
+        Please let us know if you are able to attend<br />
+        so we may prepare accordingly.
+      </p>
+
+      <div class="ornament-divider" aria-hidden="true">
+        <div class="ornament-divider__line"></div>
+        <div class="ornament-divider__diamond"></div>
+        <div class="ornament-divider__line"></div>
+      </div>
+
+      <p class="rsvp__deadline-label">RSVP By</p>
+      <p class="rsvp__deadline">1st June 2026</p>
+      <p class="rsvp__contact-note">For queries, please reach out to us</p>
+
+      <div class="rsvp__actions">
+        <a
+          class="rsvp__action rsvp__action--primary"
+          href="https://forms.gle/YOUR_FORM_LINK"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Confirm attendance using the RSVP form"
+        >
+          Confirm Attendance
+        </a>
+
+        <a
+          class="rsvp__action rsvp__action--secondary"
+          href="https://wa.me/91XXXXXXXXXX"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Contact on WhatsApp"
+        >
+          Contact on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="location-section" id="location" aria-label="Venue location">
+    <div class="section-inner reveal">
+      <span class="section-tag">Location</span>
+      <h2 class="section-heading">Find<br><em>Your Way</em></h2>
+    </div>
+
+    <div class="location__card reveal">
+      <p class="location__name-label">Venue</p>
+      <p class="location__venue-name">[Venue Name]</p>
+      <address class="location__address">
+        [Venue Address Line 1]<br />
+        [Venue Address Line 2]<br />
+        Chennai, Tamil Nadu — [PIN]
+      </address>
+      <a
+        class="location__map-link"
+        href="https://maps.google.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Open venue in Google Maps"
+      >
+        View Venue on Map →
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer" id="footer" role="contentinfo">
+    <div class="footer__flourish" aria-hidden="true">
+      <svg width="200" height="38" viewBox="0 0 200 38" fill="none">
+        <path d="M10 19 Q55 4 100 19 Q145 34 190 19" stroke="#b8966e" stroke-width="0.8" fill="none" />
+        <path d="M10 19 Q55 34 100 19 Q145 4 190 19" stroke="#b8966e" stroke-width="0.8" fill="none" />
+        <circle cx="100" cy="19" r="4" stroke="#b8966e" stroke-width="0.8" fill="none" />
+        <circle cx="100" cy="19" r="1.5" fill="#b8966e" />
+        <circle cx="10" cy="19" r="2" fill="#b8966e" />
+        <circle cx="190" cy="19" r="2" fill="#b8966e" />
+      </svg>
+    </div>
+
+    <p class="footer__names">Allwyn Jerald & Leena Maria Celestina</p>
+
+    <div class="ornament-divider footer__divider" aria-hidden="true">
+      <div class="ornament-divider__line footer__divider-line"></div>
+      <div class="ornament-divider__diamond footer__divider-diamond"></div>
+      <div class="ornament-divider__line footer__divider-line"></div>
+    </div>
+
+    <p class="footer__meta">Engagement Ceremony · 13th June 2026 · Chennai</p>
+    <p class="footer__love">With love, joy, and gratitude</p>
+  </footer>
   </div>
-</section><!-- /RSVP -->
-
-
-<!-- ════════════════════════════════════════════════ -->
-<!--  BLOCK 7 — LOCATION                              -->
-<!-- ════════════════════════════════════════════════ -->
-<section class="location-section" id="location" aria-label="Venue location">
-  <div class="section-inner reveal">
-    <span class="section-tag">Location</span>
-    <h2 class="section-heading">Find<br><em>Your Way</em></h2>
-  </div>
-
-  <div class="location__card reveal">
-    <p class="location__name-label">Venue</p>
-    <p class="location__venue-name">The Grand Ballroom</p>
-    <address class="location__address">
-      [Venue Address Line 1]<br>
-      [Venue Address Line 2]<br>
-      Chennai, Tamil Nadu — 600 0XX
-    </address>
-    <a class="location__map-link"
-       href="https://maps.google.com"
-       target="_blank"
-       rel="noopener noreferrer"
-       aria-label="Open venue in Google Maps">
-      Open in Google Maps →
-    </a>
-  </div>
-</section><!-- /LOCATION -->
-
-
-<!-- ════════════════════════════════════════════════ -->
-<!--  BLOCK 8 — FOOTER                                -->
-<!-- ════════════════════════════════════════════════ -->
-<footer class="footer" id="footer" role="contentinfo">
-
-  <!-- Decorative flourish -->
-  <div class="footer__flourish" aria-hidden="true">
-    <svg width="200" height="38" viewBox="0 0 200 38" fill="none">
-      <path d="M10 19 Q55 4 100 19 Q145 34 190 19"
-            stroke="#b8966e" stroke-width="0.8" fill="none"/>
-      <path d="M10 19 Q55 34 100 19 Q145 4 190 19"
-            stroke="#b8966e" stroke-width="0.8" fill="none"/>
-      <circle cx="100" cy="19" r="4"  stroke="#b8966e" stroke-width="0.8" fill="none"/>
-      <circle cx="100" cy="19" r="1.5" fill="#b8966e"/>
-      <circle cx="10"  cy="19" r="2"  fill="#b8966e"/>
-      <circle cx="190" cy="19" r="2"  fill="#b8966e"/>
-    </svg>
-  </div>
-
-  <p class="footer__names">Allwyn Jerald &amp; Leena Maria Celestina</p>
-
-  <div class="ornament-divider" style="margin:22px auto;" aria-hidden="true">
-    <div class="ornament-divider__line" style="opacity:0.3;"></div>
-    <div class="ornament-divider__diamond" style="width:5px;height:5px;"></div>
-    <div class="ornament-divider__line" style="opacity:0.3;"></div>
-  </div>
-
-  <p class="footer__meta">Reception · 13th June 2025 · Chennai</p>
-  <p class="footer__love">With love, joy, and gratitude</p>
-
-</footer><!-- /FOOTER -->
-
-
-<!-- ── JS — one file per module, loaded at end ── -->
-<script src="js/hero.js"></script>
-<script src="js/scroll.js"></script>
-<script src="js/countdown.js"></script>
-<script src="js/rsvp.js"></script>
-<script src="js/main.js"></script>
-
+  <script src="js/hero.js"></script>
+  <script src="js/scroll.js"></script>
+  <script src="js/countdown.js"></script>
+  <script src="js/rsvp.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
