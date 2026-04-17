@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="css/sections.css" />
 </head>
 <body class="is-locked">
-  <div class="intro-gate" id="introGate" aria-label="Invitation intro" data-photo="images/engagement-cover.jpg">
+  <div class="intro-gate" id="introGate" aria-label="Invitation intro" data-photo="images/engagement-cover.jpeg">
     <div class="intro-gate__bg" aria-hidden="true"></div>
     <div class="intro-gate__grain" aria-hidden="true"></div>
     <div class="intro-gate__glow intro-gate__glow--one" aria-hidden="true"></div>
@@ -184,7 +184,7 @@
 
     <div class="couple-story__grid reveal-stagger">
       <div class="couple-story__image-wrap">
-        <div class="couple-story__image" data-photo="images/couple-story.jpg"></div>
+        <div class="couple-story__image" data-photo="images/couple-story.jpeg"></div>
       </div>
       <div class="couple-story__text">
         <p>
@@ -353,8 +353,8 @@
       <span class="rsvp__box-bl" aria-hidden="true"></span>
 
       <p class="rsvp__intro">
-        Your presence would mean the world to us.<br />
-        Please let us know if you are able to attend<br />
+        Your presence would mean the world to us.<br>
+        Please let us know if you are able to attend<br>
         so we may prepare accordingly.
       </p>
 
@@ -364,31 +364,76 @@
         <div class="ornament-divider__line"></div>
       </div>
 
-      <p class="rsvp__deadline-label">RSVP By</p>
-      <p class="rsvp__deadline">1st June 2026</p>
-      <p class="rsvp__contact-note">For queries, please reach out to us</p>
-
-      <div class="rsvp__actions">
-        <a
-          class="rsvp__action rsvp__action--primary"
-          href="https://forms.gle/YOUR_FORM_LINK"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Confirm attendance using the RSVP form"
-        >
-          Confirm Attendance
-        </a>
-
-        <a
-          class="rsvp__action rsvp__action--secondary"
-          href="https://wa.me/91XXXXXXXXXX"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Contact on WhatsApp"
-        >
-          Contact on WhatsApp
-        </a>
+      <div class="rsvp__live-stats" id="rsvpStats">
+        <div class="rsvp__stat-card">
+          <span class="rsvp__stat-number" id="statGuests">0</span>
+          <span class="rsvp__stat-label">Guests Confirmed</span>
+        </div>
+        <div class="rsvp__stat-card">
+          <span class="rsvp__stat-number" id="statFamilies">0</span>
+          <span class="rsvp__stat-label">Families Confirmed</span>
+        </div>
       </div>
+
+      <form class="rsvp__form" id="rsvpForm" novalidate>
+        <div class="rsvp__form-grid">
+          <div class="rsvp__field">
+            <label class="rsvp__field-label" for="rsvpName">Full Name</label>
+            <input class="rsvp__input" type="text" id="rsvpName" name="name" required />
+          </div>
+
+          <div class="rsvp__field">
+            <label class="rsvp__field-label" for="rsvpPhone">Phone Number</label>
+            <input class="rsvp__input" type="tel" id="rsvpPhone" name="phone" required />
+          </div>
+
+          <div class="rsvp__field">
+            <label class="rsvp__field-label" for="rsvpEmail">Email Address</label>
+            <input class="rsvp__input" type="email" id="rsvpEmail" name="email" />
+          </div>
+
+          <div class="rsvp__field">
+            <label class="rsvp__field-label" for="rsvpAttending">Will You Attend?</label>
+            <select class="rsvp__input" id="rsvpAttending" name="attending" required>
+              <option value="">Select</option>
+              <option value="yes">Joyfully Accept</option>
+              <option value="no">Regretfully Decline</option>
+              <option value="maybe">Maybe</option>
+            </select>
+          </div>
+
+          <div class="rsvp__field" id="guestsField">
+            <label class="rsvp__field-label" for="rsvpGuests">Number of Guests</label>
+            <input class="rsvp__input" type="number" id="rsvpGuests" name="guestsCount" min="1" max="10" value="1" />
+          </div>
+
+          <div class="rsvp__field rsvp__field--full">
+            <label class="rsvp__field-label" for="rsvpNotes">Notes</label>
+            <textarea class="rsvp__input rsvp__textarea" id="rsvpNotes" name="notes" rows="4"></textarea>
+          </div>
+        </div>
+
+        <div class="rsvp__messages">
+          <p class="rsvp__message rsvp__message--error" id="rsvpError" hidden></p>
+          <p class="rsvp__message rsvp__message--success" id="rsvpSuccess" hidden></p>
+        </div>
+
+        <div class="rsvp__form-actions">
+          <button class="rsvp__action rsvp__action--primary" type="submit" id="rsvpSubmit">
+            Confirm Attendance
+          </button>
+
+          <a
+            class="rsvp__action rsvp__action--secondary"
+            href="https://wa.me/916379468686"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Contact on WhatsApp"
+          >
+            Contact on WhatsApp
+          </a>
+        </div>
+      </form>
     </div>
   </section>
 

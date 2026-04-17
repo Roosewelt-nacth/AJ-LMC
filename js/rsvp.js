@@ -1,225 +1,179 @@
 const RSVP = (() => {
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbwGi9nlNtz8E7LLt9qeOWb5gqSROy_Ax2sJKaizCJwCAptmkHSckoreqroOZRid66fvJQ/exec';
+
+  let form;
+  let submitButton;
+  let errorEl;
+  let successEl;
+  let attendingEl;
+  let guestsField;
+  let guestsInput;
+  let statGuests;
+  let statFamilies;
 
   function qs(selector, scope = document) {
     return scope.querySelector(selector);
   }
 
-  function qsa(selector, scope = document) {
-    return Array.from(scope.querySelectorAll(selector));
+  function showMessage(type, message) {
+    if (type === 'error') {
+      if (successEl) successEl.hidden = true;
+      if (errorEl) {
+        errorEl.textContent = message;
+        errorEl.hidden = false;
+      }
+      return;
+    }
+
+    if (errorEl) errorEl.hidden = true;
+    if (successEl) {
+      successEl.textContent = message;
+      successEl.hidden = false;
+    }
   }
 
-  function injectStyles() {
-    if (document.getElementById('rsvp-interaction-style')) return;
-
-    const style = document.createElement('style');
-    style.id = 'rsvp-interaction-style';
-    style.textContent = `
-      @keyframes rsvpRipple {
-        to {
-          transform: scale(2.8);
-          opacity: 0;
-        }
-      }
-
-      @keyframes rsvpToastIn {
-        from {
-          opacity: 0;
-          transform: translateX(-50%) translateY(16px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(-50%) translateY(0);
-        }
-      }
-
-      @keyframes rsvpToastOut {
-        from {
-          opacity: 1;
-          transform: translateX(-50%) translateY(0);
-        }
-        to {
-          opacity: 0;
-          transform: translateX(-50%) translateY(16px);
-        }
-      }
-
-      .rsvp-ripple {
-        position: absolute;
-        border-radius: 50%;
-        transform: scale(0);
-        pointer-events: none;
-        animation: rsvpRipple 0.65s ease-out forwards;
-        background: radial-gradient(circle, rgba(255,255,255,0.42) 0%, rgba(198,165,107,0.24) 55%, rgba(198,165,107,0) 72%);
-      }
-
-      .rsvp-toast {
-        position: fixed;
-        left: 50%;
-        bottom: 28px;
-        transform: translateX(-50%);
-        background: rgba(30, 23, 20, 0.94);
-        color: var(--pearl);
-        border: 1px solid rgba(198, 165, 107, 0.34);
-        box-shadow: 0 16px 40px rgba(30, 23, 20, 0.22);
-        border-radius: 999px;
-        padding: 14px 22px;
-        z-index: 9999;
-        white-space: nowrap;
-        font-family: var(--font-caps);
-        font-size: 10px;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        animation: rsvpToastIn 0.35s ease forwards;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-      }
-
-      .rsvp-toast.is-hiding {
-        animation: rsvpToastOut 0.35s ease forwards;
-      }
-
-      @media (max-width: 640px) {
-        .rsvp-toast {
-          width: calc(100% - 24px);
-          text-align: center;
-          white-space: normal;
-          line-height: 1.7;
-          border-radius: 22px;
-        }
-      }
-    `;
-    document.head.appendChild(style);
+  function clearMessages() {
+    if (errorEl) errorEl.hidden = true;
+    if (successEl) successEl.hidden = true;
   }
 
-  function createRipple(el, event) {
-    if (prefersReducedMotion) return;
+  function toggleGuestsField() {
+    if (!attendingEl || !guestsField || !guestsInput) return;
 
-    const existing = el.querySelector('.rsvp-ripple');
-    if (existing) existing.remove();
+    const isAttending = attendingEl.value === 'yes';
+    guestsField.style.display = isAttending ? '' : 'none';
 
-    const rect = el.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height) * 1.15;
-    const ripple = document.createElement('span');
-    const x = event.clientX - rect.left - size / 2;
-    const y = event.clientY - rect.top - size / 2;
-
-    ripple.className = 'rsvp-ripple';
-    Object.assign(ripple.style, {
-      width: `${size}px`,
-      height: `${size}px`,
-      left: `${x}px`,
-      top: `${y}px`
-    });
-
-    el.style.position = 'relative';
-    el.style.overflow = 'hidden';
-    el.appendChild(ripple);
-
-    ripple.addEventListener('animationend', () => ripple.remove(), { once: true });
+    if (!isAttending) {
+      guestsInput.value = '1';
+    }
   }
 
-  function removeExistingToast() {
-    qsa('.rsvp-toast').forEach(toast => toast.remove());
-  }
-
-  function showToast(message) {
-    removeExistingToast();
-
-    const toast = document.createElement('div');
-    toast.className = 'rsvp-toast';
-    toast.setAttribute('role', 'status');
-    toast.setAttribute('aria-live', 'polite');
-    toast.textContent = message;
-
-    document.body.appendChild(toast);
-
-    window.setTimeout(() => {
-      toast.classList.add('is-hiding');
-      window.setTimeout(() => toast.remove(), 350);
-    }, 2400);
-  }
-
-  function bindActions() {
-    const actions = qsa('.rsvp__action');
-    if (!actions.length) return;
-
-    actions.forEach(action => {
-      action.addEventListener('click', event => {
-        createRipple(action, event);
-
-        if (action.classList.contains('rsvp__action--primary')) {
-          showToast('Opening RSVP Form');
-        } else {
-          showToast('Opening WhatsApp');
-        }
+  async function fetchStats() {
+    try {
+      const response = await fetch(`${API_BASE_URL}?action=stats`, {
+        method: 'GET',
+        redirect: 'follow',
+        cache: 'no-store'
       });
-    });
+
+      const data = await response.json();
+
+      if (!data.success || !data.stats) return;
+      renderStats(data.stats);
+    } catch (_) {}
   }
 
-  function initMagnetic() {
-    const box = qs('.rsvp__box');
-    if (!box || prefersReducedMotion || window.innerWidth < 900) return;
+  function renderStats(stats) {
+    if (statGuests) statGuests.textContent = String(stats.totalGuestsAttending || 0);
+    if (statFamilies) statFamilies.textContent = String(stats.attendingResponses || 0);
+  }
 
-    let rafId = null;
-    let rotateX = 0;
-    let rotateY = 0;
+  function validateForm(payload) {
+    if (!payload.name.trim()) {
+      return 'Please enter your full name';
+    }
 
-    const render = () => {
-      box.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-2px)`;
-      rafId = null;
+    if (!payload.phone.trim()) {
+      return 'Please enter your phone number';
+    }
+
+    if (!payload.attending.trim()) {
+      return 'Please select your attendance status';
+    }
+
+    if (payload.attending === 'yes' && (!payload.guestsCount || Number(payload.guestsCount) < 1)) {
+      return 'Please enter at least 1 guest';
+    }
+
+    return '';
+  }
+
+  function getPayload() {
+    const formData = new FormData(form);
+
+    return {
+      name: String(formData.get('name') || '').trim(),
+      phone: String(formData.get('phone') || '').trim(),
+      email: String(formData.get('email') || '').trim(),
+      attending: String(formData.get('attending') || '').trim(),
+      guestsCount: Number(formData.get('guestsCount') || 1),
+      notes: String(formData.get('notes') || '').trim()
     };
-
-    box.addEventListener('mousemove', event => {
-      const rect = box.getBoundingClientRect();
-      const px = (event.clientX - rect.left) / rect.width;
-      const py = (event.clientY - rect.top) / rect.height;
-
-      rotateY = (px - 0.5) * 5.5;
-      rotateX = (0.5 - py) * 4.5;
-
-      if (!rafId) rafId = requestAnimationFrame(render);
-    });
-
-    box.addEventListener('mouseleave', () => {
-      rotateX = 0;
-      rotateY = 0;
-      box.style.transition = 'transform 0.55s var(--ease-elegant)';
-      if (!rafId) {
-        rafId = requestAnimationFrame(() => {
-          box.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
-          window.setTimeout(() => {
-            box.style.transition = '';
-          }, 550);
-        });
-      }
-    });
   }
 
-  function initHoverGlow() {
-    const box = qs('.rsvp__box');
-    if (!box) return;
+  async function submitForm(event) {
+    event.preventDefault();
+    clearMessages();
 
-    box.addEventListener('mousemove', event => {
-      const rect = box.getBoundingClientRect();
-      const x = ((event.clientX - rect.left) / rect.width) * 100;
-      const y = ((event.clientY - rect.top) / rect.height) * 100;
+    const payload = getPayload();
+    const validationError = validateForm(payload);
 
-      box.style.background = `
-        radial-gradient(circle at ${x}% ${y}%, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.78) 18%, rgba(253,246,238,0.92) 42%, rgba(253,246,238,0.94) 100%)
-      `;
-    });
+    if (validationError) {
+      showMessage('error', validationError);
+      return;
+    }
 
-    box.addEventListener('mouseleave', () => {
-      box.style.background = 'linear-gradient(180deg, rgba(255, 255, 255, 0.82) 0%, rgba(253, 246, 238, 0.92) 100%)';
-    });
+    setLoading(true);
+
+    try {
+      const response = await fetch(API_BASE_URL, {
+        method: 'POST',
+        redirect: 'follow',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        showMessage('error', data.message || 'Unable to submit RSVP right now');
+        setLoading(false);
+        return;
+      }
+
+      showMessage('success', data.message || 'Your RSVP has been received');
+      if (data.stats) renderStats(data.stats);
+
+      form.reset();
+      if (guestsInput) guestsInput.value = '1';
+      toggleGuestsField();
+    } catch (_) {
+      showMessage('error', 'Unable to connect right now. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function setLoading(isLoading) {
+    if (!submitButton) return;
+
+    submitButton.disabled = isLoading;
+    submitButton.textContent = isLoading ? 'Submitting...' : 'Confirm Attendance';
   }
 
   function init() {
-    injectStyles();
-    bindActions();
-    initMagnetic();
-    initHoverGlow();
+    form = qs('#rsvpForm');
+    submitButton = qs('#rsvpSubmit');
+    errorEl = qs('#rsvpError');
+    successEl = qs('#rsvpSuccess');
+    attendingEl = qs('#rsvpAttending');
+    guestsField = qs('#guestsField');
+    guestsInput = qs('#rsvpGuests');
+    statGuests = qs('#statGuests');
+    statFamilies = qs('#statFamilies');
+
+    if (!form) return;
+
+    form.addEventListener('submit', submitForm);
+
+    if (attendingEl) {
+      attendingEl.addEventListener('change', toggleGuestsField);
+      toggleGuestsField();
+    }
+
+    fetchStats();
   }
 
   return { init };
