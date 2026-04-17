@@ -25,7 +25,7 @@ function initIntroGate() {
   }
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const hasSeenIntro = false; //sessionStorage.getItem('al_intro_seen') === '1';
+  const hasSeenIntro = sessionStorage.getItem('al_intro_seen') === '1';
 
   createIntroPetals(introGate);
   createIntroSparkles(introGate);

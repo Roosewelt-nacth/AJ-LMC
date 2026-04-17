@@ -487,6 +487,38 @@
     <p class="footer__love">With love, joy, and gratitude</p>
   </footer>
   </div>
+  <div class="rsvp-modal" id="rsvpThanksModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="rsvpThanksTitle">
+    <div class="rsvp-modal__backdrop" data-rsvp-close="true"></div>
+
+    <div class="rsvp-modal__dialog">
+      <button class="rsvp-modal__close" type="button" id="rsvpModalClose" aria-label="Close thank you modal">
+        ×
+      </button>
+
+      <p class="rsvp-modal__eyebrow">With Gratitude</p>
+      <h3 class="rsvp-modal__title" id="rsvpThanksTitle">Thank You for Your Response</h3>
+      <p class="rsvp-modal__text" id="rsvpThanksText">
+        Your RSVP has been received with joy. We look forward to celebrating this special moment with you.
+      </p>
+
+      <div class="rsvp-modal__stats">
+        <div class="rsvp-modal__stat">
+          <span class="rsvp-modal__stat-number" id="modalStatGuests">0</span>
+          <span class="rsvp-modal__stat-label">Guests Confirmed</span>
+        </div>
+        <div class="rsvp-modal__stat">
+          <span class="rsvp-modal__stat-number" id="modalStatFamilies">0</span>
+          <span class="rsvp-modal__stat-label">Families Confirmed</span>
+        </div>
+      </div>
+
+      <div class="rsvp-modal__actions">
+        <button class="rsvp__action rsvp__action--primary" type="button" id="rsvpModalDone">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
   <script src="js/hero.js"></script>
   <script src="js/scroll.js"></script>
   <script src="js/countdown.js"></script>
