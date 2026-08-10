@@ -1,0 +1,17 @@
+{
+  "name": "Allwyn & Leena — Engagement Ceremony",
+  "short_name": "A & L",
+  "description": "Engagement ceremony of Allwyn Jerald & Leena Maria Celestina — 13 September 2026, Chennai.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#26050c",
+  "theme_color": "#4a0f1a",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
