@@ -1,5 +1,15 @@
 const ScrollReveal = (() => {
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reducedMotionQuery = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  );
+
+  // Click scroll lock state to prevent wrong active highlights during smooth scrolling
+  let isClickScrolling = false;
+  let clickScrollTimer = null;
+
+  function prefersReducedMotion() {
+    return reducedMotionQuery.matches;
+  }
 
   function qs(selector, scope = document) {
     return scope.querySelector(selector);
@@ -13,7 +23,7 @@ const ScrollReveal = (() => {
     const targets = qsa('.reveal, .reveal-stagger');
     if (!targets.length) return;
 
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion()) {
       targets.forEach(el => el.classList.add('visible'));
       return;
     }
@@ -35,56 +45,131 @@ const ScrollReveal = (() => {
     targets.forEach(el => io.observe(el));
   }
 
-  function parseEventDate(rawTime) {
-    const date = new Date(`June 13, 2025 ${rawTime}`);
-    return Number.isNaN(date.getTime()) ? null : date;
+  function getEventDate() {
+    const detailsSection = qs('.details[data-event-date]');
+    const rawDate = detailsSection?.dataset.eventDate;
+
+    if (!rawDate) return null;
+
+    const eventDate = new Date(rawDate);
+    return Number.isNaN(eventDate.getTime()) ? null : eventDate;
+  }
+
+  function parseProgrammeTime(rawTime, eventDate) {
+    if (!rawTime || !eventDate) return null;
+
+    const match = rawTime
+      .trim()
+      .match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+
+    if (!match) return null;
+
+    let hours = Number(match[1]);
+    const minutes = Number(match[2]);
+    const period = match[3].toUpperCase();
+
+    if (hours === 12) hours = 0;
+    if (period === 'PM') hours += 12;
+
+    const programmeDate = new Date(eventDate);
+    programmeDate.setHours(hours, minutes, 0, 0);
+
+    return programmeDate;
   }
 
   function initTimelineHighlight() {
     const items = qsa('.timeline__item');
     if (!items.length) return;
 
-    const now = new Date();
-    const eventDayStart = new Date('2025-06-13T00:00:00');
-    const eventDayEnd = new Date('2025-06-13T23:59:59');
+    const eventDate = getEventDate();
+    if (!eventDate) return;
 
-    if (now < eventDayStart || now > eventDayEnd) return;
+    const now = new Date();
+
+    const eventDayStart = new Date(eventDate);
+    eventDayStart.setHours(0, 0, 0, 0);
+
+    const eventDayEnd = new Date(eventDate);
+    eventDayEnd.setHours(23, 59, 59, 999);
+
+    /*
+     * Timeline highlighting is shown only on the event date.
+     */
+    if (
+      now.getTime() < eventDayStart.getTime() ||
+      now.getTime() > eventDayEnd.getTime()
+    ) {
+      return;
+    }
 
     let activeAssigned = false;
 
     items.forEach(item => {
-      const timeEl = qs('.timeline__time', item);
-      if (!timeEl) return;
+      const timeElement = qs('.timeline__time', item);
+      if (!timeElement) return;
 
-      const date = parseEventDate(timeEl.textContent.trim());
-      if (!date) return;
+      const programmeDate = parseProgrammeTime(
+        timeElement.textContent,
+        eventDate
+      );
+      if (!programmeDate) return;
 
-      if (date.getTime() <= now.getTime()) {
+      item.classList.remove('is-past', 'is-active');
+
+      if (programmeDate.getTime() <= now.getTime()) {
         item.classList.add('is-past');
-      } else if (!activeAssigned) {
+        return;
+      }
+
+      if (!activeAssigned) {
         item.classList.add('is-active');
         activeAssigned = true;
       }
     });
-
-    if (!activeAssigned) {
-      const lastItem = items[items.length - 1];
-      if (lastItem) lastItem.classList.add('is-active');
-    }
   }
 
   function getOffset() {
-    const nav = qs('.topnav');
-    if (!nav) return 24;
-    return nav.offsetHeight + 22;
+    // Navigation is fixed at the bottom on all devices,
+    // so only a small top offset is needed for smooth scroll.
+    return 24;
   }
 
-  function scrollToTarget(el) {
-    const top = el.getBoundingClientRect().top + window.pageYOffset - getOffset();
+  function setActiveNavLink(activeId) {
+    const links = qsa('.topnav__links a');
+    links.forEach(link => {
+      const href = link.getAttribute('href') || '';
+      const id = href.startsWith('#') ? href.slice(1) : '';
+      if (id === activeId) {
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  function scrollToTarget(element, targetId) {
+    const top =
+      element.getBoundingClientRect().top +
+      window.pageYOffset -
+      getOffset();
+
+    // Lock scroll spy during smooth scroll transition
+    isClickScrolling = true;
+    clearTimeout(clickScrollTimer);
+
+    if (targetId) {
+      setActiveNavLink(targetId);
+    }
+
     window.scrollTo({
       top,
-      behavior: prefersReducedMotion ? 'auto' : 'smooth'
+      behavior: prefersReducedMotion() ? 'auto' : 'smooth'
     });
+
+    // Re-enable scroll spy after smooth scroll animation completes
+    clickScrollTimer = setTimeout(() => {
+      isClickScrolling = false;
+    }, 800);
   }
 
   function initSmoothScroll() {
@@ -98,7 +183,7 @@ const ScrollReveal = (() => {
         if (!target) return;
 
         e.preventDefault();
-        scrollToTarget(target);
+        scrollToTarget(target, id);
 
         history.replaceState(null, '', `#${id}`);
       });
@@ -107,30 +192,32 @@ const ScrollReveal = (() => {
 
   function initNavFade() {
     const nav = qs('.topnav');
-    const navInner = qs('.topnav__inner');
-    if (!nav || !navInner) return;
+    if (!nav) return;
 
     const update = () => {
-      const scrolled = window.scrollY > 24;
-      navInner.style.background = scrolled
-        ? 'rgba(255, 255, 255, 0.72)'
-        : 'rgba(255, 255, 255, 0.5)';
-      navInner.style.boxShadow = scrolled
-        ? '0 16px 40px rgba(30, 23, 20, 0.12)'
-        : '0 12px 30px rgba(30, 23, 20, 0.08)';
-      navInner.style.borderColor = scrolled
-        ? 'rgba(198, 165, 107, 0.2)'
-        : 'rgba(255, 255, 255, 0.42)';
-      navInner.style.transform = scrolled ? 'translateY(0)' : 'translateY(0)';
+      if (window.scrollY > 24) {
+        nav.classList.add('is-scrolled');
+      } else {
+        nav.classList.remove('is-scrolled');
+      }
     };
 
     window.addEventListener('scroll', update, { passive: true });
     update();
   }
 
+  function clearActiveNavLinks() {
+    qsa('.topnav__links a').forEach(link => {
+      link.removeAttribute('aria-current');
+    });
+  }
+
   function initActiveNavLink() {
     const links = qsa('.topnav__links a');
     if (!links.length) return;
+
+    // Start with no highlight (hero is not a nav item)
+    clearActiveNavLinks();
 
     const map = links
       .map(link => {
@@ -143,31 +230,96 @@ const ScrollReveal = (() => {
 
     if (!map.length) return;
 
-    const setActive = activeId => {
-      map.forEach(({ link, section }) => {
-        const active = section.id === activeId;
-        link.style.color = active ? 'var(--gold-dark)' : '';
-        link.style.opacity = active ? '1' : '';
-      });
-    };
+    // Track which observed sections are currently intersecting
+    const visibleIds = new Set();
 
     const io = new IntersectionObserver(
       entries => {
-        const visible = entries
-          .filter(entry => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (isClickScrolling) return;
 
-        if (visible.length) {
-          setActive(visible[0].target.id);
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            visibleIds.add(entry.target.id);
+          } else {
+            visibleIds.delete(entry.target.id);
+          }
+        });
+
+        // Near the top / hero — clear all highlights
+        if (window.scrollY < 80) {
+          clearActiveNavLinks();
+          return;
+        }
+
+        if (!visibleIds.size) {
+          clearActiveNavLinks();
+          return;
+        }
+
+        // Prefer the section closest to the upper third of the viewport
+        let bestId = null;
+        let bestDistance = Infinity;
+
+        visibleIds.forEach(id => {
+          const el = document.getElementById(id);
+          if (!el) return;
+          const rect = el.getBoundingClientRect();
+          const distance = Math.abs(rect.top - window.innerHeight * 0.25);
+          if (distance < bestDistance) {
+            bestDistance = distance;
+            bestId = id;
+          }
+        });
+
+        if (bestId) {
+          setActiveNavLink(bestId);
         }
       },
       {
-        threshold: [0.2, 0.4, 0.6],
-        rootMargin: '-20% 0px -55% 0px'
+        // Narrow band through the upper-middle of the viewport
+        threshold: [0, 0.15, 0.35, 0.55, 0.75],
+        rootMargin: '-15% 0px -50% 0px'
       }
     );
 
     map.forEach(({ section }) => io.observe(section));
+
+    // Also clear when user scrolls back to the very top
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (isClickScrolling) return;
+        if (window.scrollY < 80) {
+          clearActiveNavLinks();
+        }
+      },
+      { passive: true }
+    );
+  }
+
+  function initSmartNav() {
+    const nav = qs('.topnav');
+    if (!nav) return;
+
+    let lastScrollY = window.scrollY;
+    const scrollThreshold = 12;
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+
+      // Always show when near the top of the page
+      if (currentScrollY <= 60) {
+        nav.classList.remove('is-hidden');
+      } else if (currentScrollY > lastScrollY + scrollThreshold) {
+        // Scrolling down → hide
+        nav.classList.add('is-hidden');
+      } else if (currentScrollY < lastScrollY - scrollThreshold) {
+        // Scrolling up → show
+        nav.classList.remove('is-hidden');
+      }
+
+      lastScrollY = currentScrollY;
+    }, { passive: true });
   }
 
   function init() {
@@ -176,6 +328,7 @@ const ScrollReveal = (() => {
     initSmoothScroll();
     initNavFade();
     initActiveNavLink();
+    initSmartNav();
   }
 
   return { init };

@@ -49,17 +49,37 @@ const Countdown = (() => {
     const next = pad(value);
     if (el.textContent === next) return;
 
-    el.classList.remove('flip');
-    void el.offsetWidth;
-    el.classList.add('flip');
-    el.textContent = next;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduced) {
+      el.textContent = next;
+      return;
+    }
+
+    // Soft settle: fade down slightly, swap value, rise back
+    el.classList.remove('is-tick', 'is-settled');
+    el.classList.add('is-updating');
+
+    window.setTimeout(() => {
+      el.textContent = next;
+      el.classList.remove('is-updating');
+      el.classList.add('is-tick');
+
+      const clear = () => {
+        el.classList.remove('is-tick');
+        el.classList.add('is-settled');
+        el.removeEventListener('animationend', clear);
+      };
+      el.addEventListener('animationend', clear);
+    }, 160);
   }
 
   function setCompletedState(strip) {
     Object.values(els).forEach(el => {
       if (!el) return;
       el.textContent = '00';
-      el.classList.add('flip');
+      el.classList.remove('is-updating', 'is-tick');
+      el.classList.add('is-settled');
     });
 
     if (!strip) return;
