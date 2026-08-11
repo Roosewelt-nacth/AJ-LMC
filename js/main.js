@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   hydratePhotoSurfaces();
   softLoadImages();
+  initPersonalGreeting();
+  initCalendarLink();
+  seedEnvelopeParticles();
   bootModules();
   initIntroGate();
   setCurrentYearMeta();
@@ -20,6 +23,103 @@ function softLoadImages() {
     img.addEventListener('load', mark, { once: true });
     img.addEventListener('error', mark, { once: true });
   });
+}
+
+/**
+ * Personal deep links: ?name=Priya or ?to=Priya
+ * Shows “Dear Priya,” above the welcome heading.
+ */
+function initPersonalGreeting() {
+  const el = document.getElementById('personalGreeting');
+  if (!el) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const raw = params.get('name') || params.get('to') || params.get('guest') || '';
+  const cleaned = raw.trim().replace(/[<>\"']/g, '').slice(0, 48);
+
+  if (!cleaned) {
+    el.hidden = true;
+    return;
+  }
+
+  // Title-case lightly without forcing ALL CAPS names
+  const display = cleaned
+    .split(/\s+/)
+    .map(part => (part ? part.charAt(0).toUpperCase() + part.slice(1) : ''))
+    .join(' ');
+
+  el.textContent = `Dear ${display},`;
+  el.hidden = false;
+}
+
+/** Build a downloadable .ics for the engagement ceremony */
+function initCalendarLink() {
+  const link = document.getElementById('addToCalendar');
+  const details = document.getElementById('details');
+  if (!link || !details) return;
+
+  const iso = details.getAttribute('data-event-date') || '2026-09-13T18:00:00+05:30';
+  const start = new Date(iso);
+  if (Number.isNaN(start.getTime())) return;
+
+  // 3-hour celebration window
+  const end = new Date(start.getTime() + 3 * 60 * 60 * 1000);
+
+  const stamp = date => {
+    // UTC form YYYYMMDDTHHMMSSZ
+    return date
+      .toISOString()
+      .replace(/[-:]/g, '')
+      .replace(/\.\d{3}Z$/, 'Z');
+  };
+
+  const venueName =
+    document.querySelector('.location__venue-name')?.textContent?.trim() ||
+    'Engagement Ceremony — Chennai';
+
+  const ics = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Allwyn & Leena//Engagement//EN',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    'BEGIN:VEVENT',
+    `DTSTART:${stamp(start)}`,
+    `DTEND:${stamp(end)}`,
+    `DTSTAMP:${stamp(new Date())}`,
+    'UID:allwyn-leena-engagement-2026-09-13@invitation',
+    'SUMMARY:Allwyn & Leena — Engagement Ceremony',
+    `DESCRIPTION:Engagement celebration of Allwyn Jerald & Leena Maria Celestina.\\nJoin us for an evening of love and blessings.`,
+    `LOCATION:${venueName.replace(/\n/g, ' ')}`,
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+
+  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  link.href = url;
+  link.setAttribute('download', 'Allwyn-Leena-Engagement.ics');
+}
+
+/** Quiet gold dust only on the envelope screen */
+function seedEnvelopeParticles() {
+  const host = document.getElementById('envelopeParticles');
+  if (!host) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const count = 14;
+  for (let i = 0; i < count; i += 1) {
+    const p = document.createElement('span');
+    p.className = 'envelope-gate__particle';
+    p.style.left = `${8 + Math.random() * 84}%`;
+    p.style.top = `${12 + Math.random() * 70}%`;
+    p.style.animationDelay = `${Math.random() * 8}s`;
+    p.style.animationDuration = `${7 + Math.random() * 5}s`;
+    const size = 2 + Math.random() * 3;
+    p.style.width = `${size}px`;
+    p.style.height = `${size}px`;
+    host.appendChild(p);
+  }
 }
 
 function initIntroGate() {
@@ -42,6 +142,7 @@ function initIntroGate() {
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const hasSeenIntro = sessionStorage.getItem('al_intro_seen') === '1';
+  sessionStorage.removeItem('al_intro_seen')
 
   const revealImmediately = () => {
     pageShell.classList.remove('is-waiting');
@@ -50,18 +151,16 @@ function initIntroGate() {
     body.classList.remove('is-locked');
   };
 
-  /** Calm, sequenced handoff from intro → invitation */
+  /** Envelope opens, then fades into the invitation */
   const revealSmoothly = () => {
-    // 1) Soften intro content first
+    if (enterBtn) enterBtn.classList.add('is-opening');
     introGate.classList.add('is-exiting');
 
-    // 2) Bring the page in underneath
     requestAnimationFrame(() => {
       pageShell.classList.remove('is-waiting');
       pageShell.classList.add('is-live');
     });
 
-    // 3) After the fade completes, unlock scroll and hide intro fully
     const finish = () => {
       introGate.classList.add('is-hidden');
       body.classList.remove('is-locked');
@@ -75,8 +174,8 @@ function initIntroGate() {
     };
 
     introGate.addEventListener('transitionend', onEnd);
-    // Safety fallback if transitionend doesn't fire
-    window.setTimeout(finish, 1200);
+    // Wait for flap + card motion, then gate fade
+    window.setTimeout(finish, prefersReducedMotion ? 100 : 1400);
   };
 
   if (prefersReducedMotion || hasSeenIntro) {
@@ -84,7 +183,6 @@ function initIntroGate() {
     return;
   }
 
-  // Hold the page behind the intro until the guest enters
   body.classList.add('is-locked');
   pageShell.classList.add('is-waiting');
   pageShell.classList.remove('is-live');
@@ -98,35 +196,42 @@ function initIntroGate() {
   const beginIntro = () => {
     if (started) return;
     started = true;
-
     sessionStorage.setItem('al_intro_seen', '1');
     revealSmoothly();
     detach();
   };
 
-  const onFirstAction = () => beginIntro();
+  const onFirstAction = event => {
+    // Only open when interacting with the envelope (or its children)
+    if (enterBtn && (event.target === enterBtn || enterBtn.contains(event.target))) {
+      beginIntro();
+    }
+  };
 
   function detach() {
-    window.removeEventListener('click', onFirstAction);
-    window.removeEventListener('touchstart', onFirstAction);
-    window.removeEventListener('keydown', onFirstAction);
-    window.removeEventListener('wheel', onFirstAction);
-    if (enterBtn) enterBtn.removeEventListener('click', onFirstAction);
+    if (enterBtn) {
+      enterBtn.removeEventListener('click', beginIntro);
+      enterBtn.removeEventListener('keydown', onKey);
+    }
   }
 
-  window.addEventListener('click', onFirstAction, { passive: true, once: true });
-  window.addEventListener('touchstart', onFirstAction, { passive: true, once: true });
-  window.addEventListener('keydown', onFirstAction, { passive: true, once: true });
-  window.addEventListener('wheel', onFirstAction, { passive: true, once: true });
+  function onKey(event) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      beginIntro();
+    }
+  }
 
   if (enterBtn) {
-    enterBtn.addEventListener('click', onFirstAction);
+    enterBtn.addEventListener('click', beginIntro);
+    enterBtn.addEventListener('keydown', onKey);
   }
 }
 
 function hydratePhotoSurfaces() {
+  // Reserved for optional photo surfaces — no-op when absent
   const introGate = document.getElementById('introGate');
-  const introBg = document.querySelector('.intro-gate__bg');
+  const introBg = document.querySelector('.envelope-gate__bg, .intro-gate__bg');
 
   if (introGate && introGate.dataset.photo && introBg) {
     introBg.style.backgroundImage = `
@@ -138,10 +243,10 @@ function hydratePhotoSurfaces() {
     introBg.style.backgroundRepeat = 'no-repeat';
   }
 
-  document.querySelectorAll('.couple-story__image[data-photo]').forEach(el => {
-    const photo = el.dataset.photo;
+  document.querySelectorAll('[data-photo]').forEach(el => {
+    if (el.id === 'introGate') return;
+    const photo = el.getAttribute('data-photo');
     if (!photo) return;
-
     el.style.backgroundImage = `
       linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
       url("${photo}")
@@ -173,7 +278,6 @@ function bootModules() {
     RSVP.init();
   }
 
-  // Active nav highlighting is owned solely by scroll.js
   enhanceExternalLinks();
 }
 
@@ -185,25 +289,28 @@ function enhanceExternalLinks() {
       href.startsWith('http://') ||
       href.startsWith('https://') ||
       href.startsWith('mailto:') ||
-      href.startsWith('tel:') ||
-      href.startsWith('https://wa.me');
+      href.startsWith('tel:');
 
     if (!isExternal) return;
+    if (link.hostname && link.hostname === window.location.hostname) return;
 
-    if (href.startsWith('http')) {
+    link.setAttribute('rel', 'noopener noreferrer');
+    if (!link.getAttribute('target')) {
       link.setAttribute('target', '_blank');
-      link.setAttribute('rel', 'noopener noreferrer');
     }
   });
 }
 
 function setCurrentYearMeta() {
-  document.documentElement.style.setProperty('--app-ready', '1');
+  const yearEls = document.querySelectorAll('[data-year]');
+  const year = String(new Date().getFullYear());
+  yearEls.forEach(el => {
+    el.textContent = year;
+  });
 }
 
 function logSignature() {
-  console.log(
-    '%c♡ Allwyn & Leena — Engagement Ceremony ♡',
-    'font-family: Georgia, serif; font-size: 16px; color: #c6a56b; padding: 8px;'
-  );
+  if (typeof console !== 'undefined' && console.log) {
+    console.log('%cAllwyn & Leena · Engagement 2026', 'color:#7b2636;font-family:serif;font-size:12px;');
+  }
 }

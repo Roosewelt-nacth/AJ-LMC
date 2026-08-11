@@ -285,47 +285,54 @@ textarea:focus-visible {
 
 .section-tag {
   display: block;
-  margin-bottom: 26px;
+  margin-bottom: 22px;
 
   font-family: var(--font-caps);
-  font-size: 11px;
+  font-size: clamp(10px, 1.4vw, 11px);
   font-weight: 500;
-  letter-spacing: 7px;
+  letter-spacing: 0.32em;
 
   color: var(--wine-600);
   text-transform: uppercase;
+  text-align: center;
 }
 
 .section-heading {
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 
   font-family: var(--font-display);
-  font-size: clamp(38px, 5.5vw, 64px);
+  font-size: clamp(36px, 5.2vw, 60px);
   font-weight: 400;
-  line-height: 1.1;
+  line-height: 1.12;
+  letter-spacing: 0.01em;
 
   color: var(--text-wine);
+  text-align: center;
   text-wrap: balance;
 }
 
 .section-heading em {
   color: var(--wine-500);
   font-style: italic;
+  font-weight: 400;
 }
 
 .section-body {
-  max-width: 620px;
+  max-width: 640px;
   margin: 0 auto;
 
   font-family: var(--font-serif);
-  font-size: 20px;
-  line-height: 1.95;
+  font-size: clamp(17px, 2.1vw, 20px);
+  line-height: 1.9;
+  letter-spacing: 0.01em;
 
   color: var(--text-wine-soft);
+  text-align: center;
+  text-wrap: pretty;
 }
 
 .section-body--spaced {
-  margin-top: 22px;
+  margin-top: 20px;
 }
 
 /* =========================================================

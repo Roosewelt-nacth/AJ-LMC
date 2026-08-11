@@ -133,9 +133,8 @@ const RSVP = (() => {
       mark(nameInput, 'rsvpNameError', 'Name looks too short');
     }
 
-    if (!payload.phone.trim()) {
-      mark(phoneInput, 'rsvpPhoneError', 'Please enter your phone number');
-    } else if (!isValidPhone(payload.phone)) {
+    // Phone & email are optional — only validate format when provided
+    if (payload.phone && !isValidPhone(payload.phone)) {
       mark(phoneInput, 'rsvpPhoneError', 'Enter a valid phone number (8–15 digits)');
     }
 

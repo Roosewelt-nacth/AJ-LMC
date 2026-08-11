@@ -45,9 +45,22 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
+    rel="preload"
+    as="style"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;500&display=swap"
+  />
+  <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;500&display=swap"
     rel="stylesheet"
+    media="print"
+    onload="this.media='all'"
   />
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+  </noscript>
 
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/base.css" />
@@ -59,36 +72,53 @@
 <body>
   <noscript>
     <style>
-      .intro-gate { display: none !important; }
+      .envelope-gate { display: none !important; }
       .page-shell { opacity: 1 !important; transform: none !important; filter: none !important; pointer-events: auto !important; }
     </style>
   </noscript>
 
   <a class="skip-link" href="#mainContent">Skip to invitation content</a>
 
-  <div class="intro-gate" id="introGate" role="region" aria-label="Invitation intro">
-    <div class="intro-gate__bg" aria-hidden="true"></div>
-    <div class="intro-gate__grain" aria-hidden="true"></div>
-    <div class="intro-gate__glow intro-gate__glow--one" aria-hidden="true"></div>
-    <div class="intro-gate__glow intro-gate__glow--two" aria-hidden="true"></div>
+  <!-- Envelope intro: click/tap to open → enters the invitation -->
+  <div class="envelope-gate" id="introGate" role="region" aria-label="Open invitation envelope">
+    <div class="envelope-gate__bg" aria-hidden="true"></div>
+    <div class="envelope-gate__grain" aria-hidden="true"></div>
+    <div class="envelope-gate__particles" id="envelopeParticles" aria-hidden="true"></div>
 
-    <div class="intro-gate__content">
-      <p class="intro-gate__eyebrow">A Special Invitation</p>
-      <div class="intro-gate__monogram">A <span>&amp;</span> L</div>
+    <button type="button" class="envelope" id="introEnter" aria-label="Open the invitation envelope">
+      <span class="envelope__shadow" aria-hidden="true"></span>
 
-      <div class="intro-gate__divider" aria-hidden="true">
-        <div class="intro-gate__divider-line"></div>
-        <div class="intro-gate__divider-dot"></div>
-        <div class="intro-gate__divider-line"></div>
-      </div>
+      <span class="envelope__flap" aria-hidden="true">
+        <span class="envelope__flap-inner">
+          <span class="envelope__flap-ornament"></span>
+        </span>
+      </span>
 
-      <p class="intro-gate__title">Allwyn Jerald &amp; Leena Maria Celestina</p>
-      <p class="intro-gate__text">Touch, click, scroll, or press any key to begin</p>
+      <span class="envelope__body" aria-hidden="true">
+        <span class="envelope__liner"></span>
+        <span class="envelope__pattern"></span>
+      </span>
 
-      <button type="button" class="intro-gate__enter" id="introEnter">
-        Open Invitation
-      </button>
-    </div>
+      <span class="envelope__card" aria-hidden="true">
+        <span class="envelope__card-border"></span>
+        <span class="envelope__card-eyebrow">Engagement Ceremony</span>
+        <span class="envelope__card-monogram">A &amp; L</span>
+        <span class="envelope__card-date">13 · 09 · 2026</span>
+      </span>
+
+      <span class="envelope__seal" aria-hidden="true">
+        <span class="envelope__seal-ring"></span>
+        <span class="envelope__seal-ring envelope__seal-ring--inner"></span>
+        <span class="envelope__seal-text">A&amp;L</span>
+      </span>
+
+      <span class="envelope__label">
+        <span class="envelope__eyebrow">You're Invited</span>
+        <span class="envelope__names">Allwyn &amp; Leena</span>
+        <span class="envelope__meta">13 September 2026 · Chennai</span>
+        <span class="envelope__hint">Tap to open</span>
+      </span>
+    </button>
   </div>
 
   <!--
@@ -216,6 +246,7 @@
       <section class="welcome" id="welcome" aria-label="Welcome message">
         <div class="section-inner reveal">
           <span class="section-tag">With Love &amp; Joy</span>
+          <p class="personal-greeting" id="personalGreeting" hidden></p>
           <h2 class="section-heading">A Beautiful Beginning<br /><em>of Forever</em></h2>
           <div class="ornament-divider" aria-hidden="true">
             <div class="ornament-divider__line"></div>
@@ -276,14 +307,28 @@
                     decoding="async"
                   />
                 </figure>
-                
                 <figure class="story-carousel__slide" data-index="1">
-                  <img class="couple-story__image" src="images/couple-story-2.jpeg" alt="Allwyn and Leena — moment two" width="960" height="1200" loading="lazy" decoding="async" />
+                  <img
+                    class="couple-story__image"
+                    src="images/couple-story-2.jpeg"
+                    alt="Allwyn and Leena — moment two"
+                    width="960"
+                    height="1200"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </figure>
                 <figure class="story-carousel__slide" data-index="2">
-                  <img class="couple-story__image" src="images/couple-story-3.jpeg" alt="Allwyn and Leena — moment three" width="960" height="1200" loading="lazy" decoding="async" />
+                  <img
+                    class="couple-story__image"
+                    src="images/couple-story-3.jpeg"
+                    alt="Allwyn and Leena — moment three"
+                    width="960"
+                    height="1200"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </figure>
-               
               </div>
 
               <!-- Dots sit on the image; shown only when 2+ slides exist -->
@@ -365,6 +410,18 @@
               <p class="detail-card__value">Elegant Traditional</p>
               <p class="detail-card__sub">Festive attire welcomed</p>
             </div>
+          </div>
+
+          <div class="details__calendar reveal">
+            <a
+              class="calendar-btn"
+              id="addToCalendar"
+              href="#"
+              download="Allwyn-Leena-Engagement.ics"
+            >
+              Add to Calendar
+            </a>
+            <p class="details__calendar-note">Save the date on your phone or computer</p>
           </div>
         </div>
       </section>
@@ -498,7 +555,7 @@
               </div>
 
               <div class="rsvp__field">
-                <label class="rsvp__field-label" for="rsvpPhone">Phone Number</label>
+                <label class="rsvp__field-label" for="rsvpPhone">Phone Number <span class="rsvp__optional">(optional)</span></label>
                 <input
                   class="rsvp__input"
                   type="tel"
@@ -507,13 +564,12 @@
                   autocomplete="tel"
                   aria-describedby="rsvpPhoneError"
                   aria-invalid="false"
-                  required
                 />
                 <p class="field-error" id="rsvpPhoneError" role="alert" hidden></p>
               </div>
 
               <div class="rsvp__field">
-                <label class="rsvp__field-label" for="rsvpEmail">Email Address</label>
+                <label class="rsvp__field-label" for="rsvpEmail">Email Address <span class="rsvp__optional">(optional)</span></label>
                 <input
                   class="rsvp__input"
                   type="email"
