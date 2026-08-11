@@ -131,28 +131,37 @@ function initIntroGate() {
   /** Envelope opens, then fades into the invitation */
   const revealSmoothly = () => {
     if (enterBtn) enterBtn.classList.add('is-opening');
-    introGate.classList.add('is-exiting');
 
-    requestAnimationFrame(() => {
-      pageShell.classList.remove('is-waiting');
-      pageShell.classList.add('is-live');
-    });
+    const envelope = document.getElementById('introEnvelope');
+    const hint = document.getElementById('introHint');
+    if (envelope) envelope.classList.add('is-opening');
+    if (hint) hint.style.opacity = '0';
 
-    const finish = () => {
-      introGate.classList.add('is-hidden');
-      body.classList.remove('is-locked');
-      introGate.removeEventListener('transitionend', onEnd);
-    };
+    const openMs = prefersReducedMotion ? 80 : 1050;
 
-    const onEnd = event => {
-      if (event.target === introGate && event.propertyName === 'opacity') {
-        finish();
-      }
-    };
+    window.setTimeout(() => {
+      introGate.classList.add('is-exiting');
 
-    introGate.addEventListener('transitionend', onEnd);
-    // Wait for flap + card motion, then gate fade
-    window.setTimeout(finish, prefersReducedMotion ? 100 : 1400);
+      requestAnimationFrame(() => {
+        pageShell.classList.remove('is-waiting');
+        pageShell.classList.add('is-live');
+      });
+
+      const finish = () => {
+        introGate.classList.add('is-hidden');
+        body.classList.remove('is-locked');
+        introGate.removeEventListener('transitionend', onEnd);
+      };
+
+      const onEnd = event => {
+        if (event.target === introGate && event.propertyName === 'opacity') {
+          finish();
+        }
+      };
+
+      introGate.addEventListener('transitionend', onEnd);
+      window.setTimeout(finish, prefersReducedMotion ? 80 : 850);
+    }, openMs);
   };
 
   if (prefersReducedMotion || hasSeenIntro) {

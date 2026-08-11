@@ -87,8 +87,10 @@
 
   <a class="skip-link" href="#mainContent">Skip to invitation content</a>
 
-  <!-- Ceremonial intro — ornate card + atmospheric background -->
+  <!-- Ceremonial envelope intro — pure CSS, no animation libraries -->
   <div class="intro-gate" id="introGate" role="region" aria-label="Open invitation">
+    <div class="intro-gate__photo" aria-hidden="true"></div>
+    <div class="intro-gate__photo-veil" aria-hidden="true"></div>
     <div class="intro-gate__aurora" aria-hidden="true"></div>
     <div class="intro-gate__glow intro-gate__glow--a" aria-hidden="true"></div>
     <div class="intro-gate__glow intro-gate__glow--b" aria-hidden="true"></div>
@@ -100,50 +102,27 @@
     <div class="intro-gate__rings" aria-hidden="true"></div>
     <div class="intro-gate__grain" aria-hidden="true"></div>
 
-    <button type="button" class="intro-card" id="introEnter" aria-label="Enter the invitation">
-      <span class="intro-card__outer" aria-hidden="true"></span>
-      <span class="intro-card__frame" aria-hidden="true">
-        <span class="intro-card__corner intro-card__corner--tl"></span>
-        <span class="intro-card__corner intro-card__corner--tr"></span>
-        <span class="intro-card__corner intro-card__corner--bl"></span>
-        <span class="intro-card__corner intro-card__corner--br"></span>
+    <button type="button" class="intro-stage" id="introEnter" aria-label="Open the invitation">
+      <span class="intro-envelope" id="introEnvelope">
+        <span class="intro-envelope__shadow"></span>
+        <span class="intro-envelope__back"></span>
+        <span class="intro-envelope__letter">
+          <span class="intro-envelope__letter-monogram">A &amp; L</span>
+          <span class="intro-envelope__letter-line"></span>
+          <span class="intro-envelope__letter-line intro-envelope__letter-line--short"></span>
+        </span>
+        <span class="intro-envelope__flap"></span>
+        <span class="intro-envelope__front"></span>
+        <span class="intro-envelope__seal">
+          <span class="intro-envelope__seal-text">A&amp;L</span>
+        </span>
       </span>
 
-      <span class="intro-card__inner">
-        <span class="intro-card__flourish" aria-hidden="true">❧</span>
-        <span class="intro-card__eyebrow">You're Invited</span>
-
-        <span class="intro-card__ornament" aria-hidden="true">
-          <span class="intro-card__ornament-line"></span>
-          <span class="intro-card__ornament-diamond"></span>
-          <span class="intro-card__ornament-line"></span>
-        </span>
-
-        <span class="intro-card__monogram">A <i>&amp;</i> L</span>
-
-        <span class="intro-card__ornament" aria-hidden="true">
-          <span class="intro-card__ornament-line"></span>
-          <span class="intro-card__ornament-diamond"></span>
-          <span class="intro-card__ornament-line"></span>
-        </span>
-
-        <span class="intro-card__names">Allwyn Jerald</span>
-        <span class="intro-card__amp">&amp;</span>
-        <span class="intro-card__names">Leena Maria Celestina</span>
-
-        <span class="intro-card__rule" aria-hidden="true"></span>
-
-        <span class="intro-card__meta">Engagement Ceremony</span>
-        <span class="intro-card__date">13 September 2026 · Chennai</span>
-
-        <span class="intro-card__seal" aria-hidden="true">
-          <span class="intro-card__seal-ring"></span>
-          <span class="intro-card__seal-text">A&amp;L</span>
-        </span>
-
-        <span class="intro-card__cta">
-          <span class="intro-card__cta-text">Open Invitation</span>
-        </span>
+      <span class="intro-stage__copy">
+        <span class="intro-stage__eyebrow">You're Invited</span>
+        <span class="intro-stage__names">Allwyn &amp; Leena</span>
+        <span class="intro-stage__meta">Engagement Ceremony · 13 September 2026</span>
+        <span class="intro-stage__hint" id="introHint">Tap to open</span>
       </span>
     </button>
   </div>
