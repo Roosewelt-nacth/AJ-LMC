@@ -64,59 +64,55 @@
 
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/intro.css" />
+  <link rel="stylesheet" href="css/nav.css" />
   <link rel="stylesheet" href="css/hero.css" />
+  <link rel="stylesheet" href="css/welcome.css" />
+  <link rel="stylesheet" href="css/story.css" />
   <link rel="stylesheet" href="css/details.css" />
   <link rel="stylesheet" href="css/timeline.css" />
-  <link rel="stylesheet" href="css/sections.css" />
+  <link rel="stylesheet" href="css/quote.css" />
+  <link rel="stylesheet" href="css/rsvp.css" />
+  <link rel="stylesheet" href="css/location.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/layout-responsive.css" />
 </head>
 <body>
   <noscript>
     <style>
-      .envelope-gate { display: none !important; }
+      .intro-gate { display: none !important; }
       .page-shell { opacity: 1 !important; transform: none !important; filter: none !important; pointer-events: auto !important; }
     </style>
   </noscript>
 
   <a class="skip-link" href="#mainContent">Skip to invitation content</a>
 
-  <!-- Envelope intro: click/tap to open → enters the invitation -->
-  <div class="envelope-gate" id="introGate" role="region" aria-label="Open invitation envelope">
-    <div class="envelope-gate__bg" aria-hidden="true"></div>
-    <div class="envelope-gate__grain" aria-hidden="true"></div>
-    <div class="envelope-gate__particles" id="envelopeParticles" aria-hidden="true"></div>
+  <!-- Archway intro: full-scene open into the invitation -->
+  <div class="intro-gate" id="introGate" role="region" aria-label="Open invitation">
+    <div class="intro-gate__wash" aria-hidden="true"></div>
+    <div class="intro-gate__grain" aria-hidden="true"></div>
 
-    <button type="button" class="envelope" id="introEnter" aria-label="Open the invitation envelope">
-      <span class="envelope__shadow" aria-hidden="true"></span>
+    <button type="button" class="intro-arch" id="introEnter" aria-label="Enter the invitation">
+      <img
+        class="intro-arch__image"
+        src="images/archway-transparent.png"
+        alt=""
+        width="1200"
+        height="1200"
+        decoding="async"
+        fetchpriority="high"
+      />
 
-      <span class="envelope__flap" aria-hidden="true">
-        <span class="envelope__flap-inner">
-          <span class="envelope__flap-ornament"></span>
-        </span>
-      </span>
+      <span class="intro-arch__veil" aria-hidden="true"></span>
 
-      <span class="envelope__body" aria-hidden="true">
-        <span class="envelope__liner"></span>
-        <span class="envelope__pattern"></span>
-      </span>
-
-      <span class="envelope__card" aria-hidden="true">
-        <span class="envelope__card-border"></span>
-        <span class="envelope__card-eyebrow">Engagement Ceremony</span>
-        <span class="envelope__card-monogram">A &amp; L</span>
-        <span class="envelope__card-date">13 · 09 · 2026</span>
-      </span>
-
-      <span class="envelope__seal" aria-hidden="true">
-        <span class="envelope__seal-ring"></span>
-        <span class="envelope__seal-ring envelope__seal-ring--inner"></span>
-        <span class="envelope__seal-text">A&amp;L</span>
-      </span>
-
-      <span class="envelope__label">
-        <span class="envelope__eyebrow">You're Invited</span>
-        <span class="envelope__names">Allwyn &amp; Leena</span>
-        <span class="envelope__meta">13 September 2026 · Chennai</span>
-        <span class="envelope__hint">Tap to open</span>
+      <span class="intro-arch__content">
+        <span class="intro-arch__eyebrow">You're Invited</span>
+        <span class="intro-arch__monogram">A <i>&amp;</i> L</span>
+        <span class="intro-arch__divider" aria-hidden="true"></span>
+        <span class="intro-arch__names">Allwyn &amp; Leena</span>
+        <span class="intro-arch__meta">Engagement Ceremony</span>
+        <span class="intro-arch__date">13 September 2026 · Chennai</span>
+        <span class="intro-arch__hint">Tap to enter</span>
       </span>
     </button>
   </div>

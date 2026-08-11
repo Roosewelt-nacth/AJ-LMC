@@ -1,0 +1,145 @@
+/* Bottom navigation */
+/* =========================================================
+   BOTTOM NAVIGATION
+   Fixed to the bottom on all devices.
+   Hides when scrolling down, shows when scrolling up.
+   ========================================================= */
+
+/* Hide navbar while intro gate is active (body lock) */
+body.is-locked .topnav {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Base bottom navigation (all devices) */
+.topnav {
+  position: fixed;
+  top: auto;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  z-index: 9000; /* above page content, below intro-gate (9998) and modal (9999) */
+  width: 100%;
+  padding: 0 20px;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  pointer-events: none;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.4s ease,
+    visibility 0.4s ease;
+}
+
+/* Smart-hide state (scroll down) */
+.topnav.is-hidden {
+  transform: translateY(calc(100% + 32px));
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.topnav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: min(100%, 1120px);
+  margin: 0 auto;
+  padding: 12px 22px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 253, 249, 0.96) 0%,
+    rgba(255, 250, 245, 0.92) 55%,
+    rgba(248, 234, 229, 0.94) 100%
+  );
+  border: 1px solid rgba(226, 199, 157, 0.62);
+  border-radius: var(--radius-pill, 9999px);
+  backdrop-filter: blur(18px) saturate(110%);
+  -webkit-backdrop-filter: blur(18px) saturate(110%);
+  box-shadow:
+    0 14px 40px rgba(18, 2, 6, 0.24),
+    0 4px 16px rgba(18, 2, 6, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96);
+  pointer-events: auto;
+}
+
+.topnav__brand {
+  flex-shrink: 0;
+  font-family: var(--font-caps, sans-serif);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  color: var(--wine-600);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.topnav__links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.topnav__links a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 5px 0;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: var(--text-wine, #4a0f1a);
+  opacity: 0.78;
+  transition: color var(--transition-base, 0.2s ease), opacity var(--transition-base, 0.2s ease);
+}
+
+.topnav__links a::after {
+  content: "";
+  position: absolute;
+  right: 50%;
+  bottom: 0;
+  left: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--wine-500, #8d3041), transparent);
+  opacity: 0;
+  transition: right 0.2s ease, left 0.2s ease, opacity 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .topnav__links a:hover {
+    color: var(--wine-500);
+    opacity: 1;
+  }
+  .topnav__links a:hover::after {
+    right: 0;
+    left: 0;
+    opacity: 1;
+  }
+}
+
+.topnav__links a[aria-current="page"] {
+  color: var(--wine-600);
+  font-weight: 600;
+  opacity: 1;
+}
+
+.topnav__links a[aria-current="page"]::after {
+  right: 0;
+  left: 0;
+  opacity: 1;
+  background: linear-gradient(90deg, transparent, var(--gold, #c6a56b), transparent);
+}
+
+/* Scroll target margin — nav is at the bottom, so top margin stays modest */
+section[id] {
+  scroll-margin-top: 24px;
+}
+

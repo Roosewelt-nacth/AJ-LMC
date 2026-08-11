@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
   softLoadImages();
   initPersonalGreeting();
   initCalendarLink();
-  seedEnvelopeParticles();
   bootModules();
   initIntroGate();
   setCurrentYearMeta();
@@ -101,27 +100,6 @@ function initCalendarLink() {
   link.setAttribute('download', 'Allwyn-Leena-Engagement.ics');
 }
 
-/** Quiet gold dust only on the envelope screen */
-function seedEnvelopeParticles() {
-  const host = document.getElementById('envelopeParticles');
-  if (!host) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  const count = 14;
-  for (let i = 0; i < count; i += 1) {
-    const p = document.createElement('span');
-    p.className = 'envelope-gate__particle';
-    p.style.left = `${8 + Math.random() * 84}%`;
-    p.style.top = `${12 + Math.random() * 70}%`;
-    p.style.animationDelay = `${Math.random() * 8}s`;
-    p.style.animationDuration = `${7 + Math.random() * 5}s`;
-    const size = 2 + Math.random() * 3;
-    p.style.width = `${size}px`;
-    p.style.height = `${size}px`;
-    host.appendChild(p);
-  }
-}
-
 function initIntroGate() {
   const introGate = document.getElementById('introGate');
   const pageShell = document.getElementById('pageShell');
@@ -142,7 +120,6 @@ function initIntroGate() {
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const hasSeenIntro = sessionStorage.getItem('al_intro_seen') === '1';
-  sessionStorage.removeItem('al_intro_seen')
 
   const revealImmediately = () => {
     pageShell.classList.remove('is-waiting');
@@ -231,7 +208,7 @@ function initIntroGate() {
 function hydratePhotoSurfaces() {
   // Reserved for optional photo surfaces — no-op when absent
   const introGate = document.getElementById('introGate');
-  const introBg = document.querySelector('.envelope-gate__bg, .intro-gate__bg');
+  const introBg = document.querySelector('.intro-gate__wash');
 
   if (introGate && introGate.dataset.photo && introBg) {
     introBg.style.backgroundImage = `

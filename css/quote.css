@@ -1,0 +1,129 @@
+/* Quote section */
+/* =========================================================
+   QUOTE SECTION
+   ========================================================= */
+
+.quote-section {
+  position: relative;
+  overflow: hidden;
+  padding: 120px 24px;
+  text-align: center;
+  background: var(--surface-wine);
+}
+
+.quote-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 18%, rgba(255, 238, 229, 0.07) 0%, rgba(255, 238, 229, 0.02) 36%, transparent 64%),
+    radial-gradient(circle at 8% 42%, rgba(255, 255, 255, 0.022) 0%, transparent 18%),
+    radial-gradient(circle at 92% 30%, rgba(112, 28, 44, 0.24) 0%, transparent 26%),
+    radial-gradient(circle at 18% 88%, rgba(118, 31, 48, 0.26) 0%, transparent 30%),
+    radial-gradient(
+      ellipse at center,
+      transparent 0%,
+      transparent 48%,
+      rgba(17, 1, 5, 0.18) 78%,
+      rgba(17, 1, 5, 0.42) 100%
+    );
+}
+
+.quote-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.04;
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='quoteNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.66' numOctaves='4' seed='11' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23quoteNoise)' opacity='0.72'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 240px 240px;
+}
+
+.quote-section .section-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.quote__mark {
+  font-family: var(--font-display);
+  font-size: 130px;
+  line-height: 0.55;
+  color: var(--gold);
+  opacity: 0.16;
+  display: block;
+  margin-bottom: 22px;
+  user-select: none;
+  position: relative;
+  z-index: 1;
+}
+
+.quote__text {
+  font-family: var(--font-display);
+  text-shadow: 0 8px 28px rgba(17, 1, 5, 0.32);
+  font-style: italic;
+  font-size: clamp(24px, 3.8vw, 40px);
+  font-weight: 400;
+  color: var(--pearl);
+  line-height: 1.55;
+  letter-spacing: 0.01em;
+  max-width: 760px;
+  margin: 0 auto 28px;
+  position: relative;
+  z-index: 1;
+  text-wrap: balance;
+}
+
+.quote__attribution {
+  font-family: var(--font-caps);
+  font-size: clamp(9px, 1.3vw, 11px);
+  letter-spacing: 0.28em;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  opacity: 0.75;
+  position: relative;
+  z-index: 1;
+}
+
+.quote__divider {
+  margin: 48px auto 0;
+  width: min(100%, 240px);
+  position: relative;
+  z-index: 1;
+}
+
+.quote__divider-line-left {
+  background: linear-gradient(90deg, transparent, rgba(226, 199, 157, 0.56));
+}
+
+.quote__divider-line-right {
+  background: linear-gradient(90deg, rgba(226, 199, 157, 0.56), transparent);
+}
+
+.quote__names {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(28px, 5vw, 50px);
+  font-weight: 400;
+  color: var(--pearl);
+  opacity: 0.9;
+  line-height: 1.22;
+  position: relative;
+  z-index: 1;
+  margin-top: 44px;
+}
+
+.quote__names span {
+  display: block;
+  font-family: var(--font-caps);
+  font-style: normal;
+  font-size: 0.44em;
+  letter-spacing: 5px;
+  color: var(--gold-light);
+  margin: 10px 0;
+}
+

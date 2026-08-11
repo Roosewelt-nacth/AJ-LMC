@@ -1,0 +1,180 @@
+/* Cross-section responsive overrides */
+/* =========================================================
+   RESPONSIVE — TABLET & SMALL LAPTOPS
+   ========================================================= */
+
+@media (max-width: 960px) {
+  .topnav {
+    bottom: 14px;
+    padding: 0 14px;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .topnav__inner {
+    padding: 10px 18px;
+    gap: 16px;
+  }
+
+  .topnav__brand {
+    font-size: 10px;
+    letter-spacing: 3.5px;
+  }
+
+  .topnav__links {
+    gap: 14px;
+  }
+
+  .topnav__links a {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 640px) {
+  .topnav {
+    bottom: 10px;
+    padding: 0 12px;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .topnav__inner {
+    padding: 8px 12px;
+    border-radius: 20px;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .topnav__brand {
+    display: none;
+  }
+
+  .topnav__links {
+    width: 100%;
+    justify-content: space-around;
+    overflow-x: auto;
+    white-space: nowrap;
+    gap: 6px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .topnav__links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .topnav__links a {
+    flex: 0 0 auto;
+    min-height: 42px;
+    padding: 0 8px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+  }
+
+  .footer {
+    padding: 76px 16px 52px;
+    background: var(--surface-wine);
+  }
+
+  .footer__flourish {
+    margin-bottom: 34px;
+  }
+
+  .footer__names {
+    font-size: clamp(27px, 8vw, 34px);
+  }
+
+  .footer__meta {
+    font-size: 9px;
+    line-height: 1.9;
+    letter-spacing: 3px;
+  }
+
+  .footer__love {
+    font-size: 16px;
+  }
+
+  .rsvp__live-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .rsvp__form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rsvp-modal__dialog {
+    width: min(100% - 20px, 540px);
+    padding: 30px 18px 22px;
+    border-radius: 24px;
+  }
+
+  .rsvp-modal__stats {
+    grid-template-columns: 1fr;
+  }
+
+  .rsvp-modal__text {
+    font-size: 17px;
+  }
+}
+
+/* =========================================================
+   VERY NARROW MOBILE SCREENS
+   ========================================================= */
+
+@media (max-width: 360px) {
+  .topnav__brand {
+    display: none;
+  }
+
+  .topnav__links {
+    gap: 4px;
+  }
+
+  .topnav__links a {
+    padding: 0 6px;
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+}
+
+/* =========================================================
+   LANDSCAPE / SHORT VIEWPORTS
+   ========================================================= */
+
+@media (max-height: 560px) and (orientation: landscape) {
+  .topnav {
+    bottom: 8px;
+    padding: 0 12px;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .topnav__inner {
+    padding: 6px 14px;
+  }
+
+  .topnav__links a {
+    min-height: 36px;
+    font-size: 10px;
+  }
+
+  .rsvp__box {
+    padding: 36px 28px;
+  }
+
+  .location__layout {
+    grid-template-columns: 1fr 1.2fr;
+    gap: 16px;
+  }
+
+  .location__map-wrap,
+  .location__map {
+    min-height: 220px;
+  }
+
+  .footer {
+    padding: 56px 20px 40px;
+  }
+}

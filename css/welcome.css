@@ -1,0 +1,83 @@
+/* Welcome, personal greeting, calendar CTA */
+/* Personal greeting */
+.personal-greeting {
+  font-family: var(--font-serif);
+  font-size: clamp(20px, 3vw, 28px);
+  font-style: italic;
+  color: var(--wine-700);
+  margin: 0 auto 18px;
+  letter-spacing: 0.01em;
+  text-align: center;
+  max-width: 640px;
+}
+
+/* Calendar CTA */
+.details__calendar {
+  margin: 40px auto 0;
+  text-align: center;
+  max-width: 420px;
+}
+
+.calendar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  padding: 14px 28px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(123, 38, 54, 0.28);
+  background: var(--surface-card);
+  color: var(--wine-900);
+  font-family: var(--font-caps);
+  font-size: 10px;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--transition-base), background var(--transition-base), border-color var(--transition-base);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .calendar-btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--gold);
+    background: rgba(255, 255, 255, 0.92);
+  }
+}
+
+.details__calendar-note {
+  margin-top: 12px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--text-soft);
+  opacity: 0.8;
+}
+
+/* =========================================================
+   WELCOME SECTION
+   ========================================================= */
+
+.welcome {
+  padding: var(--space-xl) 24px;
+  background: var(--surface-warm);
+  position: relative;
+}
+
+.welcome::before,
+.welcome::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(198, 165, 107, 0.42), transparent);
+  opacity: 0.45;
+}
+
+.welcome::before {
+  top: 0;
+}
+
+.welcome::after {
+  bottom: 0;
+}
+

@@ -1,0 +1,396 @@
+/* RSVP form + thank-you modal */
+/* =========================================================
+   RSVP SECTION
+   ========================================================= */
+
+.rsvp-section {
+  padding: var(--space-xl) 24px;
+  background: var(--surface-rose);
+}
+
+.rsvp__box {
+  max-width: 620px;
+  margin: 56px auto 0;
+  background: var(--surface-card);
+  padding: 64px 52px;
+  text-align: center;
+  position: relative;
+  border: var(--border-gold);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-soft), var(--shadow-glass);
+  backdrop-filter: blur(var(--blur-sm));
+  -webkit-backdrop-filter: blur(var(--blur-sm));
+  overflow: hidden;
+}
+
+.rsvp__box-tr,
+.rsvp__box-bl {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border-color: rgba(198, 165, 107, 0.72);
+  border-style: solid;
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.rsvp__box-tr {
+  top: -1px;
+  right: -1px;
+  border-width: 2px 2px 0 0;
+}
+
+.rsvp__box-bl {
+  bottom: -1px;
+  left: -1px;
+  border-width: 0 0 2px 2px;
+}
+
+.rsvp__intro {
+  font-family: var(--font-serif);
+  font-size: clamp(17px, 2.1vw, 20px);
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+  color: var(--text-soft);
+  margin-bottom: 34px;
+  text-align: center;
+  text-wrap: pretty;
+}
+
+.rsvp__contact-note {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 28px;
+}
+
+.rsvp__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.rsvp__action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 210px;
+  padding: 16px 28px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-caps);
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  transition: transform var(--transition-base),
+              background var(--transition-base),
+              color var(--transition-base),
+              border-color var(--transition-base),
+              box-shadow var(--transition-base);
+}
+
+.rsvp__action--primary {
+  background: var(--wine-900);
+  color: var(--pearl);
+  border: 1px solid var(--wine-900);
+  box-shadow: var(--shadow-soft);
+}
+
+.rsvp__action--secondary {
+  background: rgba(255, 255, 255, 0.54);
+  color: var(--wine-900);
+  border: var(--border-gold);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .rsvp__action--primary:hover {
+    transform: translateY(-2px);
+    background: var(--gold-dark);
+    border-color: var(--gold-dark);
+  }
+
+  .rsvp__action--secondary:hover {
+    transform: translateY(-2px);
+    border: var(--border-gold-hover);
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: var(--shadow-gold);
+  }
+}
+
+.rsvp__action--primary:active,
+.rsvp__action--secondary:active {
+  transform: translateY(0);
+}
+
+.rsvp__action--primary:disabled {
+  opacity: 0.65;
+  cursor: wait;
+  transform: none;
+}
+
+.rsvp__live-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 20px 0 32px;
+}
+
+.rsvp__stat-card {
+  padding: 20px 18px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.88) 0%, rgba(253, 246, 238, 0.9) 100%);
+  border: 1px solid rgba(198, 165, 107, 0.22);
+  box-shadow: 0 14px 34px rgba(30, 23, 20, 0.06);
+  text-align: center;
+}
+
+.rsvp__stat-number {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4vw, 42px);
+  color: var(--gold-dark);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.rsvp__stat-label {
+  display: block;
+  font-family: var(--font-caps);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.rsvp__form {
+  margin-top: 10px;
+}
+
+.rsvp__form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.rsvp__field {
+  text-align: left;
+}
+
+.rsvp__field--full {
+  grid-column: 1 / -1;
+}
+
+.rsvp__field-label {
+  display: block;
+  margin-bottom: 10px;
+  font-family: var(--font-caps);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+}
+
+.rsvp__optional {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.5px;
+  text-transform: none;
+  color: var(--text-soft);
+  opacity: 0.75;
+  font-weight: 400;
+}
+
+.rsvp__input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(198, 165, 107, 0.24);
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--wine-900);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  outline: none;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base), background var(--transition-base);
+}
+
+.rsvp__input:focus {
+  border-color: rgba(198, 165, 107, 0.52);
+  box-shadow: 0 0 0 4px rgba(198, 165, 107, 0.08);
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.rsvp__input[aria-invalid="true"] {
+  border-color: rgba(177, 79, 79, 0.55);
+  box-shadow: 0 0 0 4px rgba(177, 79, 79, 0.1);
+}
+
+.rsvp__input:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.rsvp__textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.rsvp__messages {
+  margin-top: 18px;
+}
+
+.rsvp__message {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.rsvp__message--error {
+  color: #b14f4f;
+}
+
+.rsvp__message--success {
+  color: #54724f;
+}
+
+.rsvp__form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+/* =========================================================
+   RSVP MODAL
+   ========================================================= */
+
+.rsvp-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s var(--ease-elegant), visibility 0.35s var(--ease-elegant);
+}
+
+.rsvp-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.rsvp-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(30, 23, 20, 0.48);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.rsvp-modal__dialog {
+  position: relative;
+  z-index: 1;
+  width: min(100% - 28px, 560px);
+  padding: 34px 28px 28px;
+  border-radius: 28px;
+  background: var(--surface-card);
+  border: 1px solid rgba(198, 165, 107, 0.28);
+  box-shadow: 0 24px 70px rgba(30, 23, 20, 0.18);
+  text-align: center;
+  transform: translateY(12px) scale(0.98);
+  transition: transform 0.35s var(--ease-elegant);
+}
+
+.rsvp-modal.is-open .rsvp-modal__dialog {
+  transform: translateY(0) scale(1);
+}
+
+.rsvp-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--wine-900);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(30, 23, 20, 0.08);
+}
+
+.rsvp-modal__eyebrow {
+  margin-bottom: 10px;
+  font-family: var(--font-caps);
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+}
+
+.rsvp-modal__title {
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4vw, 40px);
+  color: var(--wine-900);
+  line-height: 1.15;
+}
+
+.rsvp-modal__text {
+  margin: 0 auto 24px;
+  max-width: 420px;
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--text-soft);
+}
+
+.rsvp-modal__stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.rsvp-modal__stat {
+  padding: 18px 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(198, 165, 107, 0.18);
+  box-shadow: 0 12px 30px rgba(30, 23, 20, 0.05);
+}
+
+.rsvp-modal__stat-number {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 38px);
+  color: var(--gold-dark);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.rsvp-modal__stat-label {
+  display: block;
+  font-family: var(--font-caps);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.rsvp-modal__actions {
+  display: flex;
+  justify-content: center;
+}
+
