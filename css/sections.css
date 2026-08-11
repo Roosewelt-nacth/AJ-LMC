@@ -523,22 +523,27 @@ section[id] {
 .couple-story__grid {
   position: relative;
   z-index: 1;
+  width: 100%;
   max-width: var(--container-md);
   margin: 60px auto 0;
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: 36px;
   align-items: center;
-  padding: 0 24px;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* Story photo carousel */
 .story-carousel {
   position: relative;
+  width: 100%;
+  min-width: 0;
 }
 
 .story-carousel__viewport {
   position: relative;
+  width: 100%;
   overflow: hidden;
   border-radius: 28px;
   border: var(--border-glass);
@@ -546,28 +551,20 @@ section[id] {
   touch-action: pan-y;
   cursor: grab;
   user-select: none;
+  /* Inner gold frame — avoids negative inset overflow on mobile */
+  outline: 1px solid rgba(198, 165, 107, 0.35);
+  outline-offset: 8px;
 }
 
 .story-carousel__viewport.is-dragging {
   cursor: grabbing;
 }
 
-.story-carousel__viewport::before {
-  content: '';
-  position: absolute;
-  inset: -14px;
-  border: var(--border-gold);
-  border-radius: 34px;
-  opacity: 0.6;
-  pointer-events: none;
-  z-index: 0;
-}
-
 .story-carousel__viewport::after {
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 28px;
+  border-radius: inherit;
   pointer-events: none;
   z-index: 2;
   background:
@@ -580,11 +577,13 @@ section[id] {
   position: relative;
   z-index: 1;
   display: grid;
+  width: 100%;
 }
 
 .story-carousel__slide {
   grid-area: 1 / 1;
   margin: 0;
+  width: 100%;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.65s var(--ease-elegant), visibility 0.65s var(--ease-elegant);
@@ -601,10 +600,11 @@ section[id] {
 .couple-story__image {
   display: block;
   width: 100%;
-  min-height: 520px;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  max-height: min(72vh, 640px);
   object-fit: cover;
-  border-radius: 28px;
+  border-radius: inherit;
   pointer-events: none;
 }
 
@@ -612,7 +612,7 @@ section[id] {
 .story-carousel__dots {
   position: absolute;
   left: 50%;
-  bottom: 16px;
+  bottom: 14px;
   z-index: 4;
   display: flex;
   align-items: center;
@@ -648,6 +648,7 @@ section[id] {
 }
 
 .couple-story__text {
+  min-width: 0;
   padding: 38px 34px;
   background: var(--surface-card);
   border: var(--border-gold);
@@ -659,28 +660,124 @@ section[id] {
 
 .couple-story__text p {
   font-family: var(--font-serif);
-  font-size: 22px;
-  line-height: 1.9;
+  font-size: clamp(17px, 2.2vw, 22px);
+  line-height: 1.85;
   color: var(--text-soft);
 }
 
-@media (max-width: 640px) {
-  .couple-story__image {
-    min-height: 360px;
-    border-radius: 24px;
+/* Tablet: still side-by-side but tighter */
+@media (max-width: 900px) {
+  .couple-story {
+    padding: 84px 20px;
+  }
+
+  .couple-story__grid {
+    gap: 28px;
+    margin-top: 44px;
+  }
+
+  .couple-story__text {
+    padding: 30px 26px;
   }
 
   .story-carousel__viewport {
     border-radius: 24px;
+    outline-offset: 6px;
+  }
+}
+
+/* Mobile: stack photo above text, full width */
+@media (max-width: 640px) {
+  .couple-story {
+    padding: 72px 16px;
   }
 
-  .story-carousel__viewport::before {
-    border-radius: 28px;
-    inset: -10px;
+  .couple-story__grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-top: 36px;
+    width: 100%;
+    max-width: 100%;
   }
 
-  .story-carousel__viewport::after {
-    border-radius: 24px;
+  .story-carousel {
+    width: 100%;
+    /* room for outline so it doesn't clip */
+    padding: 6px;
+    box-sizing: border-box;
+  }
+
+  .story-carousel__viewport {
+    border-radius: 20px;
+    outline-offset: 5px;
+  }
+
+  .couple-story__image {
+    aspect-ratio: 3 / 4;
+    max-height: min(58vh, 480px);
+    width: 100%;
+  }
+
+  .story-carousel__dots {
+    bottom: 12px;
+    padding: 5px 9px;
+    gap: 7px;
+  }
+
+  .couple-story__text {
+    padding: 26px 20px;
+    border-radius: 22px;
+  }
+
+  .couple-story__text p {
+    font-size: 17px;
+    line-height: 1.8;
+  }
+}
+
+/* Very narrow phones */
+@media (max-width: 360px) {
+  .couple-story {
+    padding: 64px 12px;
+  }
+
+  .story-carousel {
+    padding: 4px;
+  }
+
+  .couple-story__image {
+    max-height: min(52vh, 400px);
+  }
+
+  .couple-story__text {
+    padding: 22px 16px;
+  }
+
+  .couple-story__text p {
+    font-size: 16px;
+  }
+}
+
+/* Landscape phones: keep image shorter so text stays reachable */
+@media (max-width: 900px) and (max-height: 480px) and (orientation: landscape) {
+  .couple-story__grid {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .couple-story__image {
+    aspect-ratio: 1 / 1;
+    max-height: 70vh;
+  }
+
+  .couple-story__text {
+    padding: 18px 16px;
+  }
+
+  .couple-story__text p {
+    font-size: 15px;
+    line-height: 1.65;
   }
 }
 
