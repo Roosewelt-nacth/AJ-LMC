@@ -301,25 +301,17 @@ const ScrollReveal = (() => {
     const nav = qs('.topnav');
     if (!nav) return;
 
-    let lastScrollY = window.scrollY;
-    const scrollThreshold = 12;
-
-    window.addEventListener('scroll', () => {
-      const currentScrollY = window.scrollY;
-
-      // Always show when near the top of the page
-      if (currentScrollY <= 60) {
-        nav.classList.remove('is-hidden');
-      } else if (currentScrollY > lastScrollY + scrollThreshold) {
-        // Scrolling down → hide
-        nav.classList.add('is-hidden');
-      } else if (currentScrollY < lastScrollY - scrollThreshold) {
-        // Scrolling up → show
-        nav.classList.remove('is-hidden');
+    const update = () => {
+      // Shrink when scrolled; expand again near the top
+      if (window.scrollY > 48) {
+        nav.classList.add('is-compact');
+      } else {
+        nav.classList.remove('is-compact');
       }
+    };
 
-      lastScrollY = currentScrollY;
-    }, { passive: true });
+    window.addEventListener('scroll', update, { passive: true });
+    update();
   }
 
   function init() {

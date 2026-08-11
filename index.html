@@ -87,32 +87,63 @@
 
   <a class="skip-link" href="#mainContent">Skip to invitation content</a>
 
-  <!-- Archway intro: full-scene open into the invitation -->
+  <!-- Ceremonial intro — ornate card + atmospheric background -->
   <div class="intro-gate" id="introGate" role="region" aria-label="Open invitation">
-    <div class="intro-gate__wash" aria-hidden="true"></div>
+    <div class="intro-gate__aurora" aria-hidden="true"></div>
+    <div class="intro-gate__glow intro-gate__glow--a" aria-hidden="true"></div>
+    <div class="intro-gate__glow intro-gate__glow--b" aria-hidden="true"></div>
+    <div class="intro-gate__glow intro-gate__glow--c" aria-hidden="true"></div>
+    <div class="intro-gate__motif intro-gate__motif--tl" aria-hidden="true"></div>
+    <div class="intro-gate__motif intro-gate__motif--tr" aria-hidden="true"></div>
+    <div class="intro-gate__motif intro-gate__motif--bl" aria-hidden="true"></div>
+    <div class="intro-gate__motif intro-gate__motif--br" aria-hidden="true"></div>
+    <div class="intro-gate__rings" aria-hidden="true"></div>
     <div class="intro-gate__grain" aria-hidden="true"></div>
 
-    <button type="button" class="intro-arch" id="introEnter" aria-label="Enter the invitation">
-      <img
-        class="intro-arch__image"
-        src="images/archway-transparent.png"
-        alt=""
-        width="1200"
-        height="1200"
-        decoding="async"
-        fetchpriority="high"
-      />
+    <button type="button" class="intro-card" id="introEnter" aria-label="Enter the invitation">
+      <span class="intro-card__outer" aria-hidden="true"></span>
+      <span class="intro-card__frame" aria-hidden="true">
+        <span class="intro-card__corner intro-card__corner--tl"></span>
+        <span class="intro-card__corner intro-card__corner--tr"></span>
+        <span class="intro-card__corner intro-card__corner--bl"></span>
+        <span class="intro-card__corner intro-card__corner--br"></span>
+      </span>
 
-      <span class="intro-arch__veil" aria-hidden="true"></span>
+      <span class="intro-card__inner">
+        <span class="intro-card__flourish" aria-hidden="true">❧</span>
+        <span class="intro-card__eyebrow">You're Invited</span>
 
-      <span class="intro-arch__content">
-        <span class="intro-arch__eyebrow">You're Invited</span>
-        <span class="intro-arch__monogram">A <i>&amp;</i> L</span>
-        <span class="intro-arch__divider" aria-hidden="true"></span>
-        <span class="intro-arch__names">Allwyn &amp; Leena</span>
-        <span class="intro-arch__meta">Engagement Ceremony</span>
-        <span class="intro-arch__date">13 September 2026 · Chennai</span>
-        <span class="intro-arch__hint">Tap to enter</span>
+        <span class="intro-card__ornament" aria-hidden="true">
+          <span class="intro-card__ornament-line"></span>
+          <span class="intro-card__ornament-diamond"></span>
+          <span class="intro-card__ornament-line"></span>
+        </span>
+
+        <span class="intro-card__monogram">A <i>&amp;</i> L</span>
+
+        <span class="intro-card__ornament" aria-hidden="true">
+          <span class="intro-card__ornament-line"></span>
+          <span class="intro-card__ornament-diamond"></span>
+          <span class="intro-card__ornament-line"></span>
+        </span>
+
+        <span class="intro-card__names">Allwyn Jerald</span>
+        <span class="intro-card__amp">&amp;</span>
+        <span class="intro-card__names">Leena Maria Celestina</span>
+
+        <span class="intro-card__rule" aria-hidden="true"></span>
+
+        <span class="intro-card__meta">Engagement Ceremony</span>
+        <span class="intro-card__date">13 September 2026 · Chennai</span>
+
+        <span class="intro-card__seal" aria-hidden="true">
+          <span class="intro-card__seal-ring"></span>
+          <span class="intro-card__seal-text">A&amp;L</span>
+        </span>
+
+        <span class="intro-card__cta">
+          <span class="intro-card__cta-text">Open Invitation</span>
+        </span>
       </span>
     </button>
   </div>
