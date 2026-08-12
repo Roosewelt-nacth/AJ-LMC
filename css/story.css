@@ -71,11 +71,10 @@
   inset: 0;
   border-radius: inherit;
   pointer-events: none;
-  z-index: 2;
+  z-index: 1;
   background:
-    linear-gradient(130deg, rgba(255, 255, 255, 0.28), transparent 36%),
-    linear-gradient(180deg, transparent 62%, rgba(18, 2, 6, 0.28) 100%),
-    linear-gradient(330deg, rgba(255, 255, 255, 0.08), transparent 40%);
+    linear-gradient(130deg, rgba(255, 255, 255, 0.22), transparent 36%),
+    linear-gradient(330deg, rgba(255, 255, 255, 0.06), transparent 40%);
 }
 
 .story-carousel__track {
@@ -117,80 +116,92 @@
 }
 
 
-/* On-image chapter captions */
+/* On-image chapter captions — above image overlays */
 .story-carousel__caption {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 2;
-  padding: 48px 20px 28px;
+  z-index: 5;
+  padding: 56px 18px 36px;
   text-align: center;
   background: linear-gradient(
     180deg,
     transparent 0%,
-    rgba(18, 2, 6, 0.15) 25%,
-    rgba(18, 2, 6, 0.62) 70%,
-    rgba(18, 2, 6, 0.78) 100%
+    rgba(18, 2, 6, 0.2) 28%,
+    rgba(18, 2, 6, 0.72) 72%,
+    rgba(18, 2, 6, 0.88) 100%
   );
   pointer-events: none;
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(8px);
   transition:
-    opacity 0.55s var(--ease-elegant, ease),
-    transform 0.55s var(--ease-elegant, ease);
+    opacity 0.5s var(--ease-elegant, ease),
+    transform 0.5s var(--ease-elegant, ease);
 }
 
 .story-carousel__slide.is-active .story-carousel__caption {
   opacity: 1;
   transform: translateY(0);
-  transition-delay: 0.18s;
+  transition-delay: 0.12s;
 }
 
 .story-carousel__caption-label {
   display: block;
   font-family: var(--font-caps, sans-serif);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: rgba(226, 199, 157, 0.9);
-  margin-bottom: 8px;
+  color: rgba(226, 199, 157, 0.95);
+  margin-bottom: 6px;
 }
 
 .story-carousel__caption-title {
   display: block;
   font-family: var(--font-display, serif);
-  font-size: clamp(18px, 3.2vw, 26px);
+  font-size: clamp(17px, 3.2vw, 26px);
   font-weight: 400;
   font-style: italic;
-  line-height: 1.3;
+  line-height: 1.35;
   color: #fff8f2;
-  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
   text-wrap: balance;
-}
-
-/* Leave room so dots don't cover the title */
-.story-carousel__dots {
-  bottom: 14px;
+  padding: 0 4px;
 }
 
 @media (max-width: 640px) {
   .story-carousel__caption {
-    padding: 40px 16px 32px;
+    padding: 52px 14px 40px;
+  }
+
+  .story-carousel__caption-label {
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    margin-bottom: 5px;
   }
 
   .story-carousel__caption-title {
-    font-size: clamp(16px, 4.5vw, 22px);
+    font-size: clamp(15px, 4.2vw, 20px);
+    line-height: 1.3;
+  }
+
+  /* Dots sit just above the caption text */
+  .story-carousel__dots {
+    bottom: auto;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
-/* Dots overlaid on the image */
+/* Dots at top of image so chapter titles stay clear */
 .story-carousel__dots {
   position: absolute;
   left: 50%;
-  bottom: 14px;
-  z-index: 4;
+  top: 14px;
+  bottom: auto;
+  z-index: 6;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -198,7 +209,7 @@
   transform: translateX(-50%);
   padding: 6px 10px;
   border-radius: 999px;
-  background: rgba(18, 2, 6, 0.28);
+  background: rgba(18, 2, 6, 0.35);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
@@ -315,7 +326,8 @@
   }
 
   .story-carousel__dots {
-    bottom: 12px;
+    top: 12px;
+    bottom: auto;
     padding: 5px 9px;
     gap: 7px;
   }
