@@ -74,7 +74,7 @@ function initCalendarLink() {
 
   const venueName =
     document.querySelector('.location__venue-name')?.textContent?.trim() ||
-    'Engagement Ceremony — Chennai';
+    'Engagement Ceremony · Chennai';
 
   const ics = [
     'BEGIN:VCALENDAR',
@@ -87,7 +87,7 @@ function initCalendarLink() {
     `DTEND:${stamp(end)}`,
     `DTSTAMP:${stamp(new Date())}`,
     'UID:allwyn-leena-engagement-2026-09-13@invitation',
-    'SUMMARY:Allwyn & Leena — Engagement Ceremony',
+    'SUMMARY:Allwyn & Leena · Engagement Ceremony',
     `DESCRIPTION:Engagement celebration of Allwyn Jerold & Leena Maria Celestina.\\nJoin us for an evening of love and blessings.`,
     `LOCATION:${venueName.replace(/\n/g, ' ')}`,
     'END:VEVENT',

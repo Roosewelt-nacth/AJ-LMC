@@ -420,3 +420,21 @@
   }
 }
 
+
+
+.couple-story .section-heading {
+  font-size: clamp(28px, 4.2vw, 44px);
+  line-height: 1.35;
+}
+
+.couple-story .section-heading em {
+  display: inline;
+  font-style: italic;
+}
+
+.couple-story .story-heading-third {
+  display: inline;
+  font-style: normal;
+  font-weight: inherit;
+  color: inherit;
+}

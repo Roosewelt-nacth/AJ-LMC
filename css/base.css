@@ -336,6 +336,10 @@ textarea:focus-visible {
   font-weight: 400;
 }
 
+.story-heading-line--sm {
+  font-size: 0.75em; /* adjust this value to taste */
+}
+
 .section-body {
   max-width: 640px;
   margin: 0 auto;
