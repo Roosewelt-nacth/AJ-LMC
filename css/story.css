@@ -5,25 +5,53 @@
 
 .couple-story {
   padding: var(--space-xl) 24px;
-  background: var(--surface-rose);
+  background: var(--surface-wine);
   position: relative;
   overflow: hidden;
+  color: var(--text-on-wine);
 }
 
 .couple-story::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 15% 25%, rgba(243, 217, 220, 0.28), transparent 32%),
-    radial-gradient(circle at 85% 80%, rgba(198, 165, 107, 0.1), transparent 28%);
-  pointer-events: none;
+  content: none;
+}
+
+.couple-story .section-tag {
+  color: var(--gold-light);
+}
+
+.couple-story .section-heading {
+  color: var(--text-on-wine);
 }
 
 .couple-story .section-heading span {
-  color: var(--rose);
+  color: var(--gold-light);
   font-style: italic;
 }
+
+.couple-story .ornament-divider__line {
+  background: linear-gradient(90deg, transparent, rgba(226, 199, 157, 0.45), transparent);
+}
+
+.couple-story .ornament-divider__diamond {
+  background: var(--gold-light);
+  box-shadow: none;
+}
+
+.couple-story__text {
+  background: var(--surface-card);
+  border: 1px solid rgba(198, 165, 107, 0.35);
+  color: var(--text-wine);
+  box-shadow: 0 12px 40px rgba(58, 12, 22, 0.18);
+}
+
+.couple-story__text p {
+  color: var(--text-wine-soft);
+}
+
+.couple-story__quote {
+  color: var(--wine-700);
+}
+
 
 .couple-story__grid {
   position: relative;
@@ -116,7 +144,8 @@
 }
 
 
-/* On-image chapter captions — above image overlays */
+
+/* On-image chapter captions */
 .story-carousel__caption {
   position: absolute;
   left: 0;
@@ -150,7 +179,7 @@
   display: block;
   font-family: var(--font-caps, sans-serif);
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: rgba(226, 199, 157, 0.95);
@@ -170,32 +199,7 @@
   padding: 0 4px;
 }
 
-@media (max-width: 640px) {
-  .story-carousel__caption {
-    padding: 52px 14px 40px;
-  }
-
-  .story-carousel__caption-label {
-    font-size: 9px;
-    letter-spacing: 0.24em;
-    margin-bottom: 5px;
-  }
-
-  .story-carousel__caption-title {
-    font-size: clamp(15px, 4.2vw, 20px);
-    line-height: 1.3;
-  }
-
-  /* Dots sit just above the caption text */
-  .story-carousel__dots {
-    bottom: auto;
-    top: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-}
-
-/* Dots at top of image so chapter titles stay clear */
+/* Dots at top — clear of chapter titles */
 .story-carousel__dots {
   position: absolute;
   left: 50%;
@@ -239,16 +243,15 @@
   min-width: 0;
   padding: 38px 34px;
   background: var(--surface-card);
-  border: var(--border-gold);
+  border: 1px solid rgba(198, 165, 107, 0.4);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
-  backdrop-filter: blur(var(--blur-sm));
-  -webkit-backdrop-filter: blur(var(--blur-sm));
+  box-shadow: 0 14px 44px rgba(58, 12, 22, 0.2);
 }
 
 .couple-story__text p {
   font-family: var(--font-serif);
   font-size: clamp(17px, 2.2vw, 22px);
+  font-weight: 400;
   line-height: 1.85;
   color: var(--text-soft);
 }
@@ -330,6 +333,19 @@
     bottom: auto;
     padding: 5px 9px;
     gap: 7px;
+  }
+
+  .story-carousel__caption {
+    padding: 52px 14px 40px;
+  }
+
+  .story-carousel__caption-label {
+    font-size: 9px;
+    letter-spacing: 0.24em;
+  }
+
+  .story-carousel__caption-title {
+    font-size: clamp(15px, 4.2vw, 20px);
   }
 
   .couple-story__text {

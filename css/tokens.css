@@ -25,11 +25,11 @@
   /* =======================================================
      WINE SCALE (primitive)
      ======================================================= */
-  --wine-950: #26050c;
-  --wine-900: #350912;
-  --wine-800: #4a0f1a;
-  --wine-700: #681c29;
-  --wine-600: #7b2636;
+  --wine-950: #1f040a;
+  --wine-900: #3a0a14;
+  --wine-800: #5c1220;
+  --wine-700: #7a1f30;
+  --wine-600: #8b2a3c;
   --wine-500: #9c4151;
   --wine-400: #c0717e;
   --wine-300: #d99aa5;
@@ -50,16 +50,16 @@
   /* =======================================================
      NEUTRALS (primitive)
      ======================================================= */
-  --cream: #fffaf5;
-  --ivory: #fdf6ee;
-  --pearl: #fffdf9;
+  --cream: #fffdfb;
+  --ivory: #faf6f1;
+  --pearl: #ffffff;
 
   /* Legacy "surface-*" neutral aliases — same values as above */
   --surface-pearl: var(--pearl);
   --surface-ivory: var(--cream);
   --surface-cream: var(--ivory);
-  --surface-blush: #faebed;
-  --surface-blush-deep: #f7e1e4;
+  --surface-blush: #f9f0f1;
+  --surface-blush-deep: #f3e6e8;
 
   /* =======================================================
      BLUSH AND ROSE ACCENTS
@@ -78,8 +78,8 @@
   --charcoal: var(--text-wine);
   --muted: #86545d;
 
-  --text-wine: #4b101b;
-  --text-wine-soft: rgba(75, 16, 27, 0.76);
+  --text-wine: #5a1a26;
+  --text-wine-soft: rgba(90, 26, 38, 0.72);
   --text-wine-muted: rgba(75, 16, 27, 0.58);
   --text-wine-faint: rgba(75, 16, 27, 0.44);
 
@@ -191,82 +191,40 @@
   --surface-wine:
     radial-gradient(
       circle at 16% 18%,
-      rgba(194, 93, 108, 0.22) 0%,
-      transparent 30%
-    ),
-    radial-gradient(
-      ellipse at 28% 82%,
-      rgba(121, 31, 48, 0.3) 0%,
-      transparent 38%
-    ),
-    radial-gradient(
-      circle at 84% 78%,
-      rgba(226, 199, 157, 0.08) 0%,
-      transparent 30%
-    ),
-    repeating-radial-gradient(
-      circle at 28% 36%,
-      rgba(255, 255, 255, 0.016) 0,
-      rgba(255, 255, 255, 0.016) 1px,
-      transparent 1px,
-      transparent 5px
-    ),
-    linear-gradient(
-      145deg,
-      #27050c 0%,
-      #4a0f1a 24%,
-      #681c29 50%,
-      #4d111c 74%,
-      #26050c 100%
-    );
-
-  --surface-warm:
-    radial-gradient(
-      circle at 12% 18%,
-      rgba(192, 113, 126, 0.075) 0%,
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 88% 82%,
-      rgba(198, 165, 107, 0.065) 0%,
-      transparent 28%
-    ),
-    linear-gradient(
-      180deg,
-      #fffdf9 0%,
-      #fdf6ee 100%
-    );
-
-  --surface-rose:
-    radial-gradient(
-      circle at 14% 20%,
-      rgba(192, 113, 126, 0.13) 0%,
+      rgba(180, 55, 75, 0.28) 0%,
       transparent 32%
     ),
     radial-gradient(
-      circle at 86% 78%,
-      rgba(198, 165, 107, 0.065) 0%,
+      ellipse at 28% 82%,
+      rgba(100, 20, 40, 0.35) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 84% 78%,
+      rgba(226, 199, 157, 0.1) 0%,
       transparent 30%
     ),
     linear-gradient(
-      180deg,
-      #fffaf5 0%,
-      #faebed 52%,
-      #fdf6ee 100%
+      145deg,
+      #3a0c16 0%,
+      #6b1a2a 28%,
+      #8b2a3c 52%,
+      #6b1a2a 76%,
+      #3a0c16 100%
     );
 
+  /* Ivory — light sections (with subtle depth) */
+  --surface-warm:
+    radial-gradient(ellipse at 12% 8%, rgba(139, 42, 60, 0.04) 0%, transparent 42%),
+    radial-gradient(ellipse at 88% 92%, rgba(198, 165, 107, 0.06) 0%, transparent 40%),
+    #fff9f6;
+
+  /* Alias kept for older refs */
+  --surface-rose: var(--surface-warm);
+
+  /* Cards — warm ivory, not stark white */
   --surface-card:
-    radial-gradient(
-      circle at 50% 0%,
-      rgba(255, 255, 255, 0.98) 0%,
-      transparent 54%
-    ),
-    linear-gradient(
-      145deg,
-      rgba(255, 253, 249, 0.97) 0%,
-      rgba(255, 250, 245, 0.95) 52%,
-      rgba(248, 234, 229, 0.94) 100%
-    );
+    linear-gradient(165deg, #fffefb 0%, #fbf5ef 55%, #f7efe8 100%);
 
   --hero-gradient: var(--surface-wine);
   --section-gradient: var(--surface-warm);

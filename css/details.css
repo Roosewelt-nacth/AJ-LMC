@@ -180,7 +180,7 @@
 
   font-family: var(--font-caps);
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 4px;
 
   color: var(--wine-600);
@@ -318,7 +318,7 @@
 
   font-family: var(--font-caps);
   font-size: 9px;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 4px;
 
   color: var(--wine-600);
@@ -357,7 +357,7 @@
 
   font-family: var(--font-caps);
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 4px;
 
   color: var(--wine-600);

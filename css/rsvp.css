@@ -5,8 +5,22 @@
 
 .rsvp-section {
   padding: var(--space-xl) 24px;
-  background: var(--surface-rose);
+  background: var(--surface-wine);
 }
+
+.rsvp-section .section-tag {
+  color: var(--gold-light);
+}
+
+.rsvp-section .section-heading {
+  color: var(--text-on-wine);
+}
+
+.rsvp-section .section-heading em {
+  color: var(--gold-light);
+}
+
+
 
 .rsvp__box {
   max-width: 620px;
@@ -100,7 +114,7 @@
 }
 
 .rsvp__action--secondary {
-  background: rgba(255, 255, 255, 0.54);
+  background: rgba(255, 250, 245, 0.5);
   color: var(--wine-900);
   border: var(--border-gold);
 }
@@ -115,7 +129,7 @@
   .rsvp__action--secondary:hover {
     transform: translateY(-2px);
     border: var(--border-gold-hover);
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 252, 248, 0.9);
     box-shadow: var(--shadow-gold);
   }
 }
@@ -141,7 +155,7 @@
 .rsvp__stat-card {
   padding: 20px 18px;
   border-radius: 22px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.88) 0%, rgba(253, 246, 238, 0.9) 100%);
+  background: var(--surface-card);
   border: 1px solid rgba(198, 165, 107, 0.22);
   box-shadow: 0 14px 34px rgba(30, 23, 20, 0.06);
   text-align: center;
@@ -208,7 +222,7 @@
   padding: 14px 16px;
   border-radius: 16px;
   border: 1px solid rgba(198, 165, 107, 0.24);
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 252, 248, 0.95);
   color: var(--wine-900);
   font-family: var(--font-sans);
   font-size: 14px;
@@ -219,7 +233,7 @@
 .rsvp__input:focus {
   border-color: rgba(198, 165, 107, 0.52);
   box-shadow: 0 0 0 4px rgba(198, 165, 107, 0.08);
-  background: rgba(255, 255, 255, 0.96);
+  background: #fffefb;
 }
 
 .rsvp__input[aria-invalid="true"] {
@@ -230,7 +244,7 @@
 .rsvp__input:disabled {
   opacity: 0.55;
   cursor: not-allowed;
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 250, 245, 0.55);
 }
 
 .rsvp__textarea {
@@ -322,7 +336,7 @@
   height: 36px;
   border: 0;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 252, 248, 0.92);
   color: var(--wine-900);
   font-size: 24px;
   line-height: 1;
@@ -366,7 +380,7 @@
 .rsvp-modal__stat {
   padding: 18px 16px;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.76);
+  background: rgba(255, 252, 248, 0.9);
   border: 1px solid rgba(198, 165, 107, 0.18);
   box-shadow: 0 12px 30px rgba(30, 23, 20, 0.05);
 }
@@ -394,3 +408,16 @@
   justify-content: center;
 }
 
+
+
+.rsvp-section .rsvp__intro {
+  color: var(--text-on-wine-soft);
+}
+
+.rsvp-section .ornament-divider__line {
+  background: linear-gradient(90deg, transparent, rgba(226, 199, 157, 0.45), transparent);
+}
+
+.rsvp-section .ornament-divider__diamond {
+  background: var(--gold-light);
+}

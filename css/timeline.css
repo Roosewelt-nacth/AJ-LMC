@@ -1,6 +1,6 @@
 .timeline-section {
   padding: var(--space-xl) 24px;
-  background: var(--surface-warm);
+  background: var(--surface-wine);
 }
 
 .timeline {
@@ -8,6 +8,20 @@
   max-width: 760px;
   margin: 72px auto 0;
 }
+
+.timeline-section .section-tag {
+  color: var(--gold-light);
+}
+
+.timeline-section .section-heading {
+  color: var(--text-on-wine);
+}
+
+.timeline-section .section-heading em {
+  color: var(--gold-light);
+}
+
+
 
 .timeline::before {
   content: '';
@@ -191,4 +205,17 @@
   .timeline__spacer {
     display: none;
   }
+}
+
+
+.timeline-section .timeline__time {
+  color: var(--gold-light);
+}
+
+.timeline-section .timeline__event {
+  color: var(--text-on-wine);
+}
+
+.timeline-section .timeline__note {
+  color: var(--text-on-wine-soft);
 }

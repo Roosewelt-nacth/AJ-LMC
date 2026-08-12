@@ -8,7 +8,9 @@
   overflow: hidden;
   padding: 120px 24px;
   text-align: center;
-  background: var(--surface-wine);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 252, 248, 1) 0%, transparent 60%),
+    var(--surface-warm);
 }
 
 .quote-section::before {
@@ -18,17 +20,9 @@
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 50% 18%, rgba(255, 238, 229, 0.07) 0%, rgba(255, 238, 229, 0.02) 36%, transparent 64%),
-    radial-gradient(circle at 8% 42%, rgba(255, 255, 255, 0.022) 0%, transparent 18%),
-    radial-gradient(circle at 92% 30%, rgba(112, 28, 44, 0.24) 0%, transparent 26%),
-    radial-gradient(circle at 18% 88%, rgba(118, 31, 48, 0.26) 0%, transparent 30%),
-    radial-gradient(
-      ellipse at center,
-      transparent 0%,
-      transparent 48%,
-      rgba(17, 1, 5, 0.18) 78%,
-      rgba(17, 1, 5, 0.42) 100%
-    );
+    radial-gradient(ellipse at 50% 20%, rgba(198, 165, 107, 0.1) 0%, transparent 55%),
+    radial-gradient(ellipse at 15% 80%, rgba(139, 42, 60, 0.05) 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 75%, rgba(139, 42, 60, 0.04) 0%, transparent 40%);
 }
 
 .quote-section::after {
@@ -36,12 +30,12 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  opacity: 0.04;
+  opacity: 0.03;
   pointer-events: none;
-  mix-blend-mode: soft-light;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='quoteNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.66' numOctaves='4' seed='11' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23quoteNoise)' opacity='0.72'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='quoteNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' seed='11' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23quoteNoise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
-  background-size: 240px 240px;
+  background-size: 180px 180px;
 }
 
 .quote-section .section-inner {
@@ -54,18 +48,18 @@
   margin-bottom: 18px;
   font-family: var(--font-caps, sans-serif);
   font-size: clamp(10px, 1.4vw, 11px);
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.36em;
   text-transform: uppercase;
-  color: var(--gold-light, #e2c79d);
-  opacity: 0.85;
+  color: var(--wine-600);
+  opacity: 0.9;
 }
 
 .quote__mark {
   font-family: var(--font-display);
   font-size: 130px;
   line-height: 0.55;
-  color: var(--gold);
+  color: var(--gold-dark);
   opacity: 0.16;
   display: block;
   margin-bottom: 22px;
@@ -80,7 +74,7 @@
   font-style: italic;
   font-size: clamp(24px, 3.8vw, 40px);
   font-weight: 400;
-  color: var(--pearl);
+  color: var(--text-wine);
   line-height: 1.55;
   letter-spacing: 0.01em;
   max-width: 760px;
@@ -94,7 +88,7 @@
   font-family: var(--font-caps);
   font-size: clamp(9px, 1.3vw, 11px);
   letter-spacing: 0.28em;
-  color: var(--gold-light);
+  color: var(--wine-600);
   text-transform: uppercase;
   opacity: 0.75;
   position: relative;
@@ -121,7 +115,7 @@
   font-style: italic;
   font-size: clamp(28px, 5vw, 50px);
   font-weight: 400;
-  color: var(--pearl);
+  color: var(--text-wine);
   opacity: 0.9;
   line-height: 1.22;
   position: relative;
@@ -135,7 +129,7 @@
   font-style: normal;
   font-size: 0.44em;
   letter-spacing: 5px;
-  color: var(--gold-light);
+  color: var(--wine-600);
   margin: 10px 0;
 }
 
