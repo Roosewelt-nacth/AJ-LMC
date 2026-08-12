@@ -61,6 +61,8 @@
 }
 
 .location__address {
+  text-align: center;
+  font-style: normal;
   font-family: var(--font-serif);
   font-size: 18px;
   color: var(--text-soft);
