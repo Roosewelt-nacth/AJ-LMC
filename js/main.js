@@ -88,7 +88,7 @@ function initCalendarLink() {
     `DTSTAMP:${stamp(new Date())}`,
     'UID:allwyn-leena-engagement-2026-09-13@invitation',
     'SUMMARY:Allwyn & Leena — Engagement Ceremony',
-    `DESCRIPTION:Engagement celebration of Allwyn Jerald & Leena Maria Celestina.\\nJoin us for an evening of love and blessings.`,
+    `DESCRIPTION:Engagement celebration of Allwyn Jerold & Leena Maria Celestina.\\nJoin us for an evening of love and blessings.`,
     `LOCATION:${venueName.replace(/\n/g, ' ')}`,
     'END:VEVENT',
     'END:VCALENDAR'
