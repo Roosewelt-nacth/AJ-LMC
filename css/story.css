@@ -86,6 +86,7 @@
 }
 
 .story-carousel__slide {
+  position: relative;
   grid-area: 1 / 1;
   margin: 0;
   width: 100%;
@@ -93,6 +94,8 @@
   visibility: hidden;
   transition: opacity 0.65s var(--ease-elegant), visibility 0.65s var(--ease-elegant);
   pointer-events: none;
+  overflow: hidden;
+  border-radius: inherit;
 }
 
 .story-carousel__slide.is-active {
@@ -111,6 +114,75 @@
   object-fit: cover;
   border-radius: inherit;
   pointer-events: none;
+}
+
+
+/* On-image chapter captions */
+.story-carousel__caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 48px 20px 28px;
+  text-align: center;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(18, 2, 6, 0.15) 25%,
+    rgba(18, 2, 6, 0.62) 70%,
+    rgba(18, 2, 6, 0.78) 100%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.55s var(--ease-elegant, ease),
+    transform 0.55s var(--ease-elegant, ease);
+}
+
+.story-carousel__slide.is-active .story-carousel__caption {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.18s;
+}
+
+.story-carousel__caption-label {
+  display: block;
+  font-family: var(--font-caps, sans-serif);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(226, 199, 157, 0.9);
+  margin-bottom: 8px;
+}
+
+.story-carousel__caption-title {
+  display: block;
+  font-family: var(--font-display, serif);
+  font-size: clamp(18px, 3.2vw, 26px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.3;
+  color: #fff8f2;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+  text-wrap: balance;
+}
+
+/* Leave room so dots don't cover the title */
+.story-carousel__dots {
+  bottom: 14px;
+}
+
+@media (max-width: 640px) {
+  .story-carousel__caption {
+    padding: 40px 16px 32px;
+  }
+
+  .story-carousel__caption-title {
+    font-size: clamp(16px, 4.5vw, 22px);
+  }
 }
 
 /* Dots overlaid on the image */
@@ -168,6 +240,25 @@
   font-size: clamp(17px, 2.2vw, 22px);
   line-height: 1.85;
   color: var(--text-soft);
+}
+
+.couple-story__text p + p {
+  margin-top: 1.1em;
+}
+
+.couple-story__quote {
+  font-style: italic;
+  color: var(--wine-700, #6b1f2e);
+}
+
+.couple-story__quote em {
+  display: inline;
+  font-style: italic;
+  color: var(--wine-800, #4a0f1a);
+}
+
+.story-lead {
+  letter-spacing: 0.01em;
 }
 
 /* Tablet: still side-by-side but tighter */
