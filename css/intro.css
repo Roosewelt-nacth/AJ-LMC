@@ -378,9 +378,9 @@ body.rsvp-modal-open {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Clear the wax seal that sits on the top edge of this panel */
-  padding: 36px 16px 20px;
+  padding: 28px 10px 14px;
   box-sizing: border-box;
+  overflow: visible;
 }
 
 .intro-envelope__seal {
@@ -427,36 +427,42 @@ body.rsvp-modal-open {
 .intro-envelope__invite-text {
   display: block;
   width: 100%;
+  max-width: 100%;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   text-align: center;
-  font-family: var(--font-caps, "Cinzel", serif);
-  font-size: clamp(10px, 2.6vw, 12px);
+  font-family: var(--font-caps, "Cinzel", Georgia, serif);
+  font-size: clamp(11px, 3.2vw, 13px);
   font-weight: 400;
-  letter-spacing: 0.34em;
-  text-indent: 0.34em; /* offsets letter-spacing so the line reads centered */
-  padding-left: 0.34em;
+  letter-spacing: 0.22em;
+  text-indent: 0.22em;
   text-transform: uppercase;
   color: #f3e2c0;
   text-shadow:
     0 1px 0 rgba(255, 255, 255, 0.12),
     0 2px 14px rgba(0, 0, 0, 0.4);
   white-space: nowrap;
+  overflow: visible;
 }
 
 .intro-envelope__invite-ornament {
   display: block;
-  width: min(52%, 120px);
-  height: 1px;
+  flex-shrink: 0;
+  width: min(56%, 128px);
+  height: 2px;
+  min-height: 2px;
+  border-radius: 1px;
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(226, 199, 157, 0.15) 15%,
-    rgba(226, 199, 157, 0.75) 50%,
-    rgba(226, 199, 157, 0.15) 85%,
+    rgba(226, 199, 157, 0.35) 12%,
+    rgba(242, 220, 170, 0.95) 50%,
+    rgba(226, 199, 157, 0.35) 88%,
     transparent 100%
   );
-  opacity: 0.9;
+  opacity: 1;
+  box-shadow: 0 0 6px rgba(226, 199, 157, 0.35);
 }
 
 .intro-envelope.is-opening .intro-envelope__invite {
@@ -551,7 +557,49 @@ body.rsvp-modal-open {
   }
 
   .intro-envelope {
-    width: min(86vw, 300px);
+    width: min(88vw, 320px);
+    overflow: visible;
+  }
+
+  .intro-envelope__seal {
+    width: 44px;
+    height: 44px;
+  }
+
+  .intro-envelope__front {
+    padding: 30px 8px 12px;
+  }
+
+  .intro-envelope__invite {
+    gap: 10px;
+    max-width: 100%;
+  }
+
+  .intro-envelope__invite-text {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-indent: 0.18em;
+    /* Keep readable; avoid clipping from wide tracking */
+    white-space: normal;
+    line-height: 1.35;
+  }
+
+  .intro-envelope__invite-ornament {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: min(58%, 140px);
+    height: 2px;
+    min-height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(226, 199, 157, 0.45) 10%,
+      #f2dcaa 50%,
+      rgba(226, 199, 157, 0.45) 90%,
+      transparent 100%
+    );
+    box-shadow: 0 0 8px rgba(226, 199, 157, 0.4);
   }
 }
 
