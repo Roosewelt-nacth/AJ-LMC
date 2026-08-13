@@ -253,7 +253,7 @@ body.rsvp-modal-open {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(20px, 4vh, 32px);
+  gap: clamp(16px, 3.2vh, 28px);
   -webkit-tap-highlight-color: transparent;
   animation: introCardIn 1.15s var(--ease-elegant) both;
 }
@@ -402,6 +402,32 @@ body.rsvp-modal-open {
   color: #fff8ef;
 }
 
+/* "You Are Invited" centered on the envelope face */
+.intro-envelope__invite {
+  position: absolute;
+  left: 50%;
+  top: 62%;
+  z-index: 6;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  text-align: center;
+  font-family: var(--font-caps, "Cinzel", serif);
+  font-size: clamp(10px, 2.8vw, 12px);
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #f6ead7;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.55s var(--ease-elegant);
+}
+
+.intro-envelope.is-opening .intro-envelope__invite {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.92);
+}
+
+
 /* Open animation */
 .intro-envelope.is-opening .intro-envelope__flap {
   transform: rotateX(175deg);
@@ -495,17 +521,18 @@ body.rsvp-modal-open {
 
 @media (max-height: 520px) and (orientation: landscape) {
   .intro-stage {
-    flex-direction: row;
-    width: min(92vw, 640px);
-    gap: 28px;
+    flex-direction: column;
+    width: min(92vw, 560px);
+    gap: 12px;
   }
 
   .intro-envelope {
-    width: min(36vw, 240px);
+    width: min(36vw, 220px);
   }
 
-  .intro-stage__copy {
-    text-align: left;
+  .intro-stage__copy--above,
+  .intro-stage__copy--below {
+    text-align: center;
   }
 
   .intro-gate__motif {
@@ -533,4 +560,38 @@ body.rsvp-modal-open {
   .intro-envelope__seal {
     transition-duration: 0.01ms !important;
   }
+}
+
+
+/* "You Are Invited" always sits above the envelope */
+.intro-stage__copy--above {
+  order: -1;
+  text-align: center;
+  width: 100%;
+  margin: 0 0 2px;
+  z-index: 3;
+}
+
+.intro-stage__copy--above .intro-stage__eyebrow {
+  display: block;
+  margin-bottom: 0;
+  font-size: clamp(12px, 2.6vmin, 14px);
+  font-weight: 400;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: #f0d9a8;
+  text-shadow:
+    0 2px 18px rgba(0, 0, 0, 0.45),
+    0 0 24px rgba(198, 165, 107, 0.25);
+}
+
+
+.intro-stage__copy--below {
+  text-align: center;
+}
+
+.intro-stage.is-opening .intro-stage__copy--above,
+.intro-stage.is-opening .intro-stage__copy--below {
+  opacity: 0;
+  transform: translateY(-8px);
 }

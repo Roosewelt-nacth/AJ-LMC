@@ -119,7 +119,7 @@ function initIntroGate() {
   }
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const hasSeenIntro = sessionStorage.getItem('al_intro_seen') === '1';
+  const hasSeenIntro = sessionStorage.getItem('al_intro_seen') === '0';
 
   const revealImmediately = () => {
     pageShell.classList.remove('is-waiting');

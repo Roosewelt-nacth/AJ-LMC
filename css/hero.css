@@ -538,6 +538,19 @@
   text-transform: uppercase;
 }
 
+.hero__venue {
+  margin-top: 18px;
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2.6vw, 24px);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  color: var(--text-wine);
+  opacity: 0.92;
+  text-shadow: 0 4px 14px rgba(75, 16, 27, 0.08);
+}
+
+
 /* =========================================================
    STATIC SCROLL INDICATOR
    ========================================================= */
@@ -990,5 +1003,53 @@
   .hero__particle {
     animation: none;
     transition: none;
+  }
+}
+
+
+/* Clear event facts on the invitation panel */
+.hero__facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 28px;
+  width: min(100%, 420px);
+  margin: 8px auto 0;
+  text-align: center;
+}
+
+.hero__fact {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hero__fact-label {
+  font-family: var(--font-caps);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--wine-600);
+  opacity: 0.85;
+}
+
+.hero__fact-value {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 2.4vw, 20px);
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--text-wine);
+  text-wrap: balance;
+}
+
+@media (max-width: 640px) {
+  .hero__facts {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    width: 100%;
+  }
+
+  .hero__fact-value {
+    font-size: clamp(17px, 4.5vw, 20px);
   }
 }

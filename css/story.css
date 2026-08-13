@@ -23,11 +23,6 @@
   color: var(--text-on-wine);
 }
 
-.couple-story .section-heading span {
-  color: var(--gold-light);
-  font-style: italic;
-}
-
 .couple-story .ornament-divider__line {
   background: linear-gradient(90deg, transparent, rgba(226, 199, 157, 0.45), transparent);
 }
@@ -422,19 +417,30 @@
 
 
 
-.couple-story .section-heading {
-  font-size: clamp(28px, 4.2vw, 44px);
-  line-height: 1.35;
-}
-
-.couple-story .section-heading em {
-  display: inline;
+/* Unified chapter lines — small, soft, one color */
+.couple-story .story-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35em;
+  margin-bottom: 20px;
+  font-size: clamp(18px, 2.6vw, 24px);
+  font-weight: 400;
   font-style: italic;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+  color: rgba(255, 248, 242, 0.88);
 }
 
-.couple-story .story-heading-third {
-  display: inline;
-  font-style: normal;
-  font-weight: inherit;
+.couple-story .story-heading__line {
+  display: block;
+  font-family: var(--font-display);
+  font-size: inherit;
+  font-style: italic;
+  font-weight: 400;
   color: inherit;
+}
+
+.couple-story .story-heading__line + .story-heading__line {
+  opacity: 0.92;
 }
