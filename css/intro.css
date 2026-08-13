@@ -375,6 +375,12 @@ body.rsvp-modal-open {
   border: 1px solid rgba(198, 165, 107, 0.28);
   border-top: 0;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Clear the wax seal that sits on the top edge of this panel */
+  padding: 36px 16px 20px;
+  box-sizing: border-box;
 }
 
 .intro-envelope__seal {
@@ -402,29 +408,58 @@ body.rsvp-modal-open {
   color: #fff8ef;
 }
 
-/* "You Are Invited" centered on the envelope face */
+/* Ceremonial invite line — centered in bottom panel under the seal */
 .intro-envelope__invite {
-  position: absolute;
-  left: 50%;
-  top: 62%;
-  z-index: 6;
-  transform: translate(-50%, -50%);
-  width: 90%;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 240px;
+  margin: 0 auto;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.intro-envelope__invite-text {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
   text-align: center;
   font-family: var(--font-caps, "Cinzel", serif);
-  font-size: clamp(10px, 2.8vw, 12px);
+  font-size: clamp(10px, 2.6vw, 12px);
   font-weight: 400;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.34em;
+  text-indent: 0.34em;
   text-transform: uppercase;
-  color: #f6ead7;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
-  pointer-events: none;
-  transition: opacity 0.4s ease, transform 0.55s var(--ease-elegant);
+  color: #f3e2c0;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.12),
+    0 2px 14px rgba(0, 0, 0, 0.4);
+  white-space: nowrap;
+}
+
+.intro-envelope__invite-ornament {
+  display: block;
+  width: min(52%, 120px);
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(226, 199, 157, 0.15) 15%,
+    rgba(226, 199, 157, 0.75) 50%,
+    rgba(226, 199, 157, 0.15) 85%,
+    transparent 100%
+  );
+  opacity: 0.9;
 }
 
 .intro-envelope.is-opening .intro-envelope__invite {
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0.92);
 }
 
 
