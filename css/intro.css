@@ -434,7 +434,8 @@ body.rsvp-modal-open {
   font-size: clamp(10px, 2.6vw, 12px);
   font-weight: 400;
   letter-spacing: 0.34em;
-  text-indent: 0.34em;
+  text-indent: 0.34em; /* offsets letter-spacing so the line reads centered */
+  padding-left: 0.34em;
   text-transform: uppercase;
   color: #f3e2c0;
   text-shadow:
